@@ -23,7 +23,6 @@ public class BlurProcessor implements ImageLoaderView.ProcessorInterface {
 
     @Override
     public void process(Context context, Bitmap bitmap) {
-//        FastBlur.applyOriginal(context, bitmap, radius != 0 ? radius : DEFAULT_BLUR_RADIUS);
         StackBlur.blurNatively(bitmap, radius != 0 ? radius : DEFAULT_BLUR_RADIUS, true);
     }
 }

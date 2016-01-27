@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -209,5 +211,16 @@ public final class ImageUtils {
     public interface OnImageSaveCallback {
 
         void onImageSave(boolean isSuccess);
+    }
+
+    /**
+     * drawable转bitmap
+     *
+     * @param drawable drawable
+     * @return bitmap
+     */
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        return bd.getBitmap();
     }
 }
