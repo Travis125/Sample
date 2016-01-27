@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--视频播放器-->
+        <activity
+            android:name="com.sunnybear.player.VideoPlayerActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
