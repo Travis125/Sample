@@ -32,7 +32,7 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
     @Bind(R.id.iv_image)
     ImageLoaderView ivImage;
     @Bind(R.id.fl_gesture)
-    GestureFrameLayout fl_gesture;
+    GestureFrameLayout fl_gesture;//缩放控件
 
     private Request request;
 
