@@ -113,7 +113,7 @@ public class ImagePipelineConfigFactory {
 //            .setPoolFactory(poolFactory)//线程池工厂配置
                 .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())//渐进式JPEG图
 //            .setRequestListeners(requestListeners)//图片请求监听
-//            .setResizeAndRotateEnabledForNetwork(boolean resizeAndRotateEnabledForNetwork)//调整和旋转是否支持网络图片
+                .setResizeAndRotateEnabledForNetwork(true)//调整和旋转是否支持网络图片
                 .setSmallImageDiskCacheConfig(diskSmallCacheConfig);//磁盘缓存配置(小图片，可选～三级缓存的小图优化缓存)
         return configBuilder.build();
     }

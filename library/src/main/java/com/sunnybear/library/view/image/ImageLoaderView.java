@@ -1,12 +1,10 @@
 package com.sunnybear.library.view.image;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -18,8 +16,8 @@ import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.BaseRepeatedPostProcessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.sunnybear.library.R;
 import com.sunnybear.library.util.ResourcesUtils;
+import com.sunnybear.library.util.StringUtils;
 
 import java.util.LinkedList;
 
@@ -39,15 +37,19 @@ public class ImageLoaderView extends SimpleDraweeView {
     }
 
     public ImageLoaderView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ImageDraweeView);
-        mRatio = array.getFloat(R.styleable.ImageDraweeView_aspect_ratio, -1f);
-        if (mRatio != -1f)
-            setAspectRatio(mRatio);
-        mDefaultDrawable = array.getDrawable(R.styleable.ImageDraweeView_default_drawable);
-        if (mDefaultDrawable != null)
-            setDefaultImage(mDefaultDrawable);
-        array.recycle();
+        this(context, attrs, 0);
+    }
+
+    public ImageLoaderView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+//        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ImageDraweeView);
+//        mRatio = array.getFloat(R.styleable.ImageDraweeView_aspect_ratio, -1f);
+//        if (mRatio != -1f)
+//            setAspectRatio(mRatio);
+//        mDefaultDrawable = array.getDrawable(R.styleable.ImageDraweeView_default_drawable);
+//        if (mDefaultDrawable != null)
+//            setDefaultImage(mDefaultDrawable);
+//        array.recycle();
         init(context);
     }
 
@@ -129,14 +131,14 @@ public class ImageLoaderView extends SimpleDraweeView {
      * @param url 图片的url
      */
     public void setImageURL(String url) {
-        if (TextUtils.isEmpty(url))
-            return;
+        if (StringUtils.isEmpty(url)) return;
         Uri uri = Uri.parse(url);
-        setImageURI(uri);
+//        setImageURI(uri);
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                 .setPostprocessor(mProcessor)
                 .setAutoRotateEnabled(true)
-                .setLocalThumbnailPreviewsEnabled(true)
+//                .setLocalThumbnailPreviewsEnabled(true)//预先加载本地缩略图
+                .setProgressiveRenderingEnabled(true)//允许渐进式JPEG图片加载
                 .setResizeOptions(mResizeOptions)
                 .build();
         DraweeController controller = Fresco.newDraweeControllerBuilder()
@@ -169,6 +171,8 @@ public class ImageLoaderView extends SimpleDraweeView {
                 processor.process(mContext, bitmap);
             }
         }
+
+
     }
 
     /**

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--ImageDraweeView-->
-    <declare-styleable name="ImageDraweeView">
+    <!--<declare-styleable name="ImageDraweeView">
         <attr name="aspect_ratio" format="float" />
         <attr name="default_drawable" format="reference" />
-    </declare-styleable>
+    </declare-styleable>-->
     <!--BasicRecyclerView-->
     <declare-styleable name="BasicRecyclerView">
         <attr name="layout_mode" format="enum">
