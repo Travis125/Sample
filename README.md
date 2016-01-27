@@ -6,3 +6,16 @@ library是快速开发框架
 该框架中的方法与类见注释
 
 blur是C层图片模糊库(动态库已集成如library中)
+
+videoplayer是视频播放库
+使用方法:
+    AndroidManifest.xml
+        <!--视频播放器-->
+        <activity
+            android:name="com.sunnybear.player.VideoPlayerActivity"
+            android:screenOrientation="landscape"/>
+    Activity或者Fragment中调用
+         Bundle bundle = new Bundle();
+         bundle.putString(VideoPlayerActivity.VIDEO_URL,
+                                SDCardUtils.getSDCardPath() + File.separator + "test.mp4");
+         startActivity(VideoPlayerActivity.class, bundle);

@@ -20,18 +20,19 @@
         android:layout_below="@id/tv_text"
         android:text="执行网络请求"/>
 
-    <!--<Button
+    <Button
         android:id="@+id/btn_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_execute"
-        android:text="播放视频"/>-->
+        android:text="播放视频"/>
 
     <com.alexvasilkov.gestures.views.GestureFrameLayout
         android:id="@+id/fl_gesture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
         <com.sunnybear.library.view.image.ImageLoaderView
             android:id="@+id/iv_image"

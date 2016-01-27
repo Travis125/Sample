@@ -2,9 +2,11 @@ package com.sunnybear.sample;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alexvasilkov.gestures.GestureController;
 import com.alexvasilkov.gestures.Settings;
 import com.alexvasilkov.gestures.views.GestureFrameLayout;
 import com.squareup.okhttp.Request;
@@ -14,8 +16,12 @@ import com.sunnybear.library.model.network.callback.SimpleFastJsonSerializableCa
 import com.sunnybear.library.model.network.request.FormEncodingRequestBuilder;
 import com.sunnybear.library.model.network.request.RequestMethod;
 import com.sunnybear.library.util.Logger;
+import com.sunnybear.library.util.SDCardUtils;
 import com.sunnybear.library.view.image.ImageLoaderView;
 import com.sunnybear.library.view.image.processor.WatermarkProcessor;
+import com.sunnybear.player.VideoPlayerActivity;
+
+import java.io.File;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -58,12 +64,41 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
                 .setImageURL("http://i1.mopimg.cn/img/tt/2016-01/1047/20160121105301285.jpg790x600.jpg");
     }
 
+    private void addListener() {
+        fl_gesture.getController().setOnGesturesListener(new GestureController.OnGestureListener() {
+            @Override
+            public void onDown(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                return false;
+            }
+        });
+    }
+
     @Override
     protected String[] getRequestUrls() {
         return new String[0];
     }
 
-    @OnClick({R.id.btn_execute/*, R.id.btn_player*/})
+    @OnClick({R.id.btn_execute, R.id.btn_player})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -87,12 +122,12 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
                     }
                 });
                 break;
-            /*case R.id.btn_player:
+            case R.id.btn_player:
                 Bundle bundle = new Bundle();
-                bundle.putString(VideoPlayerActivity.BUNDLE_VIDEO_URL,
-                        "http://www.modrails.com/videos/passenger_nginx.mov");
+                bundle.putString(VideoPlayerActivity.VIDEO_URL,
+                        SDCardUtils.getSDCardPath() + File.separator + "test.mp4");
                 startActivity(VideoPlayerActivity.class, bundle);
-                break;*/
+                break;
         }
     }
 }

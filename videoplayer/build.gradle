@@ -1,15 +1,19 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.sunnybear.sample"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+        }
     }
     buildTypes {
         release {
@@ -20,7 +24,5 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':library')
-    compile project(':videoplayer')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
