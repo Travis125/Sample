@@ -19,3 +19,9 @@ videoplayer是视频播放库
          bundle.putString(VideoPlayerActivity.VIDEO_URL,
                                 SDCardUtils.getSDCardPath() + File.separator + "test.mp4");
          startActivity(VideoPlayerActivity.class, bundle);
+         
+makejar是打jar包试例
+使用方法:
+        配置见build.gradle
+        在控制台中输入gradlew makeJar
+        输入路径 build/libs/xxxx.jar
