@@ -20,16 +20,29 @@
         android:layout_below="@id/tv_text"
         android:text="执行网络请求"/>
 
-    <com.sunnybear.library.view.image.ImageLoaderView
-        android:id="@+id/iv_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        app:actualImageScaleType="focusCrop"
-        app:default_drawable="@mipmap/ic_launcher"
-        app:roundBottomLeft="true"
-        app:roundBottomRight="true"
-        app:roundTopLeft="true"
-        app:roundTopRight="true"
-        app:roundedCornerRadius="4dp"/>
+    <!--<Button
+        android:id="@+id/btn_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_execute"
+        android:text="播放视频"/>-->
+
+    <com.alexvasilkov.gestures.views.GestureFrameLayout
+        android:id="@+id/fl_gesture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <com.sunnybear.library.view.image.ImageLoaderView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:placeholderImage="@mipmap/ic_launcher"
+            app:roundBottomLeft="true"
+            app:roundBottomRight="true"
+            app:roundTopLeft="true"
+            app:roundTopRight="true"
+            app:roundedCornerRadius="4dp"
+            app:viewAspectRatio="0.7"/>
+    </com.alexvasilkov.gestures.views.GestureFrameLayout>
 </RelativeLayout>

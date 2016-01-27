@@ -1,9 +1,12 @@
 package com.sunnybear.sample;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alexvasilkov.gestures.Settings;
+import com.alexvasilkov.gestures.views.GestureFrameLayout;
 import com.squareup.okhttp.Request;
 import com.sunnybear.library.controller.BasicFragmentActivity;
 import com.sunnybear.library.model.network.CacheType;
@@ -12,7 +15,7 @@ import com.sunnybear.library.model.network.request.FormEncodingRequestBuilder;
 import com.sunnybear.library.model.network.request.RequestMethod;
 import com.sunnybear.library.util.Logger;
 import com.sunnybear.library.view.image.ImageLoaderView;
-import com.sunnybear.library.view.image.processor.BlurProcessor;
+import com.sunnybear.library.view.image.processor.WatermarkProcessor;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -22,6 +25,8 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
     TextView tvText;
     @Bind(R.id.iv_image)
     ImageLoaderView ivImage;
+    @Bind(R.id.fl_gesture)
+    GestureFrameLayout fl_gesture;
 
     private Request request;
 
@@ -36,8 +41,21 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
                 .addParam("a", "上海市")
                 .build(RequestMethod.GET, "http://gc.ditu.aliyun.com/geocoding");
 
-        ivImage.addProcessor(new BlurProcessor(100))
-                .setImageURL("http://i1.mopimg.cn/img/tt/2016-01/1092/20160125101310688.jpg790x600.jpg");
+        fl_gesture.getController().getSettings()
+                .setMaxZoom(5f)//最大放大等级
+                .setPanEnabled(true)//是否启用了平移
+                .setZoomEnabled(true)//是否启用了缩放
+                .setDoubleTapEnabled(true)//是否启用通过双击缩放
+                .setRotationEnabled(false)//是否启用了旋转的姿态
+                .setRestrictBounds(true)//是否应该保存在图像转换边界
+                .setOverscrollDistance(0f, 0f)//Overscroll距离像素。用户将能够“滚动”这个距离。不能小于0
+                .setOverzoomFactor(2f)//Overzoom因素。用户将能够“变焦”这个因素。不能< 1
+                .setFillViewport(false)//如果设置为true小图像缩放以适合整个窗口(或整个运动区域如果是集),即使这需要缩放级别高于最大缩放级别。
+                .setFitMethod(Settings.Fit.INSIDE)//设置显示窗口区域内图像拟合方法
+                .setGravity(Gravity.CENTER);//图像引力窗口区域内
+        ivImage/*.addProcessor(new BlurProcessor(10))*/
+                .addProcessor(new WatermarkProcessor(R.mipmap.ic_launcher, WatermarkProcessor.WatermarkLocation.TOP_LEFT))
+                .setImageURL("http://i1.mopimg.cn/img/tt/2016-01/1047/20160121105301285.jpg790x600.jpg");
     }
 
     @Override
@@ -45,7 +63,7 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
         return new String[0];
     }
 
-    @OnClick(R.id.btn_execute)
+    @OnClick({R.id.btn_execute/*, R.id.btn_player*/})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -69,6 +87,12 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
                     }
                 });
                 break;
+            /*case R.id.btn_player:
+                Bundle bundle = new Bundle();
+                bundle.putString(VideoPlayerActivity.BUNDLE_VIDEO_URL,
+                        "http://www.modrails.com/videos/passenger_nginx.mov");
+                startActivity(VideoPlayerActivity.class, bundle);
+                break;*/
         }
     }
 }
