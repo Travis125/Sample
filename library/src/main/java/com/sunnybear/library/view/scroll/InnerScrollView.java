@@ -28,7 +28,6 @@ public class InnerScrollView extends ScrollView {
         super(context, attrs, defStyleAttr);
     }
 
-
     public void resume() {
         overScrollBy(0, -lastScrollDelta, 0, getScrollY(), 0, getScrollRange(), 0, 0, true);
         lastScrollDelta = 0;
