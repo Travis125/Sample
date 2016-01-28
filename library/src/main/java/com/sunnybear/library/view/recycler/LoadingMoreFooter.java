@@ -2,6 +2,7 @@ package com.sunnybear.library.view.recycler;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ class LoadingMoreFooter extends RelativeLayout {
     private ImageView mIvLoading;
     private TextView mTvLoading;
 
+    private Drawable mLoadingDrawable;
     private String mLoadingText;//加载中文字
     private String mNoMoreText;//没有更多时文字
 
@@ -57,14 +59,17 @@ class LoadingMoreFooter extends RelativeLayout {
         mNoMoreText = array.getString(R.styleable.LoadMoreRecyclerView_no_more_text);
         if (StringUtils.isEmpty(mNoMoreText))
             mNoMoreText = context.getResources().getString(R.string.loadMore_noMoreText);
+        mLoadingDrawable = array.getDrawable(R.styleable.LoadMoreRecyclerView_loading_drawable);
         array.recycle();
     }
 
     private void initView(Context context) {
-        mRootView = LayoutInflater.from(context).inflate(R.layout.widget_loading_footer, null);
+        mRootView = LayoutInflater.from(context).inflate(R.layout.widget_loading_footer, this);
         mIvLoading = (ImageView) mRootView.findViewById(R.id.iv_loading);
         mTvLoading = (TextView) mRootView.findViewById(R.id.tv_loading);
-        addView(mRootView);
+        if (mLoadingDrawable != null)
+            mIvLoading.setImageDrawable(mLoadingDrawable);
+//        addView(mRootView);
     }
 
     /**

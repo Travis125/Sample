@@ -108,13 +108,13 @@ public abstract class BasicAdapter<Item extends Serializable, VH extends BasicVi
      */
     public abstract VH getViewHolder(View itemView, int viewType);
 
-    /**
-     * 向itemView上绑定数据
-     *
-     * @param holder ViewHolder
-     * @param item   item数据
-     */
-    public abstract void onBindItem(VH holder, Item item, int position);
+//    /**
+//     * 向itemView上绑定数据
+//     *
+//     * @param holder ViewHolder
+//     * @param item   item数据
+//     */
+//    public abstract void onBindItem(VH holder, Item item, int position);
 
     @Override
     public int getItemCount() {
@@ -146,22 +146,11 @@ public abstract class BasicAdapter<Item extends Serializable, VH extends BasicVi
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!PhoneUtil.isFastDoubleClick()) {
+                if (!PhoneUtil.isFastDoubleClick())
                     if (mOnItemClickListener != null)
                         mOnItemClickListener.onItemClick(item, position);
-                } else {
-                    Logger.e("重复点击");
-                }
-//                if (isProcess) Logger.e("重复点击");
-//                if (mOnItemClickListener != null && !isProcess)
-//                    mOnItemClickListener.onItemClick(item, position);
-//                isProcess = true;
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        isProcess = false;
-//                    }
-//                }, 200);
+                    else
+                        Logger.e("重复点击");
             }
         });
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -175,7 +164,7 @@ public abstract class BasicAdapter<Item extends Serializable, VH extends BasicVi
         });
         if (isStartAnimation)
             setAnimator(holder.itemView, position);
-        onBindItem(holder, item, position);
+        holder.onBindItem(holder, item, position);
     }
 
     /**
