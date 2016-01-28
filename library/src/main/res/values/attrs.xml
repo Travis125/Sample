@@ -14,6 +14,7 @@
             <enum name="grid" value="3"/>
         </attr>
         <attr name="column_num" format="integer"/>
+        <!--间隔线-->
         <attr name="has_row_divider" format="boolean"/>
         <attr name="has_rank_divider" format="boolean"/>
         <attr name="divider_width" format="dimension"/>
@@ -23,9 +24,12 @@
         <attr name="divider_marginTop" format="dimension"/>
         <attr name="divider_marginBottom" format="dimension"/>
         <attr name="divider_color" format="color"/>
+        <!--嵌套-->
         <attr name="is_inner" format="boolean"/>
+        <!--按压效果-->
         <attr name="is_process" format="boolean"/>
         <attr name="process_background" format="integer|reference"/>
+        <!--动画-->
         <attr name="is_start_animator" format="boolean"/>
         <attr name="is_first_only" format="boolean"/>
         <attr name="duration_animator" format="integer"/>
