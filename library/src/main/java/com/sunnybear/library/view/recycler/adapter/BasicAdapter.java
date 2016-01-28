@@ -142,7 +142,7 @@ public abstract class BasicAdapter<Item extends Serializable, VH extends BasicVi
     public void onBindViewHolder(final VH holder, final int position) {
         final Item item = mItems.get(position);
         final View itemView = holder.itemView;
-        itemView.setTag(position);
+//        itemView.setTag(position);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
