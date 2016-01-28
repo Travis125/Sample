@@ -36,16 +36,11 @@
 
         <com.sunnybear.library.view.image.ImageLoaderView
             android:id="@+id/iv_image"
+            style="@style/main_image_style.round"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:placeholderImage="@mipmap/ic_launcher"
-            app:progressBarAutoRotateInterval="1000"
-            app:progressBarImage="@mipmap/ani_loading_bubble"
-            app:roundBottomLeft="true"
-            app:roundBottomRight="true"
-            app:roundTopLeft="true"
-            app:roundTopRight="true"
-            app:roundedCornerRadius="4dp"
+            app:fadeDuration="500"
+            app:roundedCornerRadius="10dp"
             app:viewAspectRatio="0.7"/>
     </com.alexvasilkov.gestures.views.GestureFrameLayout>
 </RelativeLayout>

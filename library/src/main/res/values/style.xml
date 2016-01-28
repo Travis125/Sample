@@ -18,6 +18,7 @@
 
     <!--Crop-->
     <style name="Crop"></style>
+
     <style name="Crop.DoneCancelBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/crop__bar_height</item>
@@ -27,12 +28,14 @@
         <item name="android:dividerPadding" tools:ignore="NewApi">12dp</item>
         <item name="android:background">@color/crop__button_bar</item>
     </style>
+
     <style name="Crop.ActionButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/crop__selectable_background</item>
     </style>
+
     <style name="Crop.ActionButtonText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -44,12 +47,42 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">13sp</item>
     </style>
+
     <style name="Crop.ActionButtonText.Done">
         <item name="android:drawableLeft">@drawable/crop__ic_done</item>
         <item name="android:text">@string/crop__done</item>
     </style>
+
     <style name="Crop.ActionButtonText.Cancel">
         <item name="android:drawableLeft">@drawable/crop__ic_cancel</item>
         <item name="android:text">@string/crop__cancel</item>
+    </style>
+    <!--图片加载主样式-->
+    <style name="main_image_style">
+        <!--加载图片的比例类型-->
+        <item name="actualImageScaleType">focusCrop</item>
+        <!--占位图的比例类型-->
+        <item name="placeholderImageScaleType">fitCenter</item>
+        <!--失败图的比例类型-->
+        <item name="failureImageScaleType">centerInside</item>
+        <!--重试图的比例类型-->
+        <item name="retryImageScaleType">centerCrop</item>
+        <!--加载loading图的比例类型-->
+        <item name="progressBarImageScaleType">centerInside</item>
+        <!--加载loading自动旋转时间-->
+        <item name="progressBarAutoRotateInterval">1000</item>
+        <!--加载loading图-->
+        <item name="progressBarImage">@drawable/image_loading</item>
+    </style>
+    <!--圆角图片加载样式-->
+    <style name="main_image_style.round">
+        <item name="roundTopLeft">true</item>
+        <item name="roundTopRight">true</item>
+        <item name="roundBottomLeft">true</item>
+        <item name="roundBottomRight">true</item>
+    </style>
+    <!--圆形图片加载样式-->
+    <style name="main_image_style.circle">
+        <item name="roundAsCircle">true</item>
     </style>
 </resources>
