@@ -18,7 +18,6 @@ import com.sunnybear.library.model.network.request.RequestMethod;
 import com.sunnybear.library.util.Logger;
 import com.sunnybear.library.util.SDCardUtils;
 import com.sunnybear.library.view.image.ImageLoaderView;
-import com.sunnybear.library.view.image.processor.BlurProcessor;
 import com.sunnybear.player.VideoPlayerActivity;
 
 import java.io.File;
@@ -59,9 +58,9 @@ public class MainActivity extends BasicFragmentActivity implements View.OnClickL
                 .setFillViewport(false)//如果设置为true小图像缩放以适合整个窗口(或整个运动区域如果是集),即使这需要缩放级别高于最大缩放级别。
                 .setFitMethod(Settings.Fit.INSIDE)//设置显示窗口区域内图像拟合方法
                 .setGravity(Gravity.CENTER);//图像引力窗口区域内
-        ivImage.addProcessor(new BlurProcessor(10))
+        ivImage/*.addProcessor(new BlurProcessor(10))*/
                 /*.addProcessor(new WatermarkProcessor(R.mipmap.ic_launcher, WatermarkProcessor.WatermarkLocation.TOP_LEFT))*/
-                .setImageURL("http://i1.mopimg.cn/img/tt/2016-01/1047/20160121105301285.jpg790x600.jpg");
+                .setImageURL("http://i1.mopimg.cn/img/tt/2016-01/916/2016012510130832.jpg790x600.jpg");
     }
 
     private void addListener() {
