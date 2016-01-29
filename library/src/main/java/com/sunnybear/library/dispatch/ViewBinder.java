@@ -9,11 +9,13 @@ import android.os.Bundle;
  * 绑定View实例
  * Created by sunnybear on 16/1/29.
  */
-public abstract class ViewBinder<AC extends DispatchActivity> implements Presenter {
+public abstract class ViewBinder<AC extends Dispatch> implements Presenter {
     protected AC mContext;
 
     public ViewBinder(Context context) {
         mContext = (AC) context;
+        if (!(mContext instanceof DispatchActivity))
+            throw new RuntimeException("ViewBinder中的Content必须是DispatchActivity类型");
     }
 
     @Override
@@ -33,7 +35,7 @@ public abstract class ViewBinder<AC extends DispatchActivity> implements Present
      * @param args        传递参数
      */
     protected void startActivity(Class<? extends Activity> targetClass, Bundle args) {
-        mContext.startActivity(targetClass, args);
+        ((DispatchActivity) mContext).startActivity(targetClass, args);
     }
 
     /**
@@ -52,7 +54,7 @@ public abstract class ViewBinder<AC extends DispatchActivity> implements Present
      * @param args        传递参数
      */
     protected void startService(Class<? extends Service> targetClass, Bundle args) {
-        mContext.startService(targetClass, args);
+        ((DispatchActivity) mContext).startService(targetClass, args);
     }
 
     /**
