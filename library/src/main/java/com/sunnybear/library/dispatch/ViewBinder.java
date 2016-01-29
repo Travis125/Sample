@@ -9,7 +9,7 @@ import android.os.Bundle;
  * 绑定View实例
  * Created by sunnybear on 16/1/29.
  */
-public abstract class ViewBinder<AC extends Dispatch> implements Presenter {
+public abstract class ViewBinder<AC extends Dispatch> implements ViewModelBridge {
     protected AC mContext;
 
     public ViewBinder(Context context) {

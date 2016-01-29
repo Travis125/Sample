@@ -3,10 +3,10 @@ package com.sunnybear.library.dispatch;
 import android.os.Bundle;
 
 /**
- * View和Model的桥梁,在BasicFragmentActivity中使用
+ * View和Model的桥梁,在DispatchActivity中使用
  * Created by sunnybear on 16/1/29.
  */
-interface Presenter {
+interface ViewModelBridge {
     /**
      * 设置布局id
      *

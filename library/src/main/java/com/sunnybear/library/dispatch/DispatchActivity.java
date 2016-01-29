@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
  * 基础FragmentActivity,主管模组分发
  * Created by sunnybear on 16/1/29.
  */
-public abstract class DispatchActivity<VB extends Presenter> extends AppCompatActivity implements Dispatch {
+public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCompatActivity implements Dispatch {
     protected static final String EVENT_HOME_CLICK = "home_click";//点击Home键的EventBus标签
 
     private Context mContext;

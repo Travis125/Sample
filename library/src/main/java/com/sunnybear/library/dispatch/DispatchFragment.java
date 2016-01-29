@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  * 基础Fragment,主管模组分发
  * Created by sunnybear on 16/1/29.
  */
-public abstract class DispatchFragment<VB extends Presenter> extends Fragment implements Dispatch {
+public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragment implements Dispatch {
     protected Context mContext;
     protected BasicApplication mApplication;
     protected LoadingHUD loading;
