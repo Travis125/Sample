@@ -1,9 +1,11 @@
 sunnybear快速开发框架源码和例子
 
-sample是测试例子
+sample是测试试例
 
 library是快速开发框架
 该框架中的方法与类见注释
+说明:BasicFragment和BasicFragmentActivity调整为过期,新增DispatchActivity和DispatchFragment(类似MVP模式),
+试例见sample
 
 blur是C层图片模糊库(动态库已集成如library中)
 
