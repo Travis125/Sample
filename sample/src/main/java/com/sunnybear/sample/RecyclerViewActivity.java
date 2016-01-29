@@ -3,7 +3,7 @@ package com.sunnybear.sample;
 import android.content.Context;
 
 import com.sunnybear.library.controller.eventbus.Subcriber;
-import com.sunnybear.library.dispatch.DispatchFragmentActivity;
+import com.sunnybear.library.dispatch.DispatchActivity;
 import com.sunnybear.library.util.ToastUtils;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by sunnybear on 16/1/29.
  */
-public class RecyclerViewActivity extends DispatchFragmentActivity<RecyclerViewViewBinder> {
+public class RecyclerViewActivity extends DispatchActivity<RecyclerViewViewBinder> {
 
     @Override
     protected RecyclerViewViewBinder getViewBinder(Context context) {

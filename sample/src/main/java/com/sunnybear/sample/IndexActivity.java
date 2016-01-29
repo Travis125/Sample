@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.squareup.okhttp.Request;
 import com.sunnybear.library.controller.eventbus.Subcriber;
-import com.sunnybear.library.dispatch.DispatchFragmentActivity;
+import com.sunnybear.library.dispatch.DispatchActivity;
 import com.sunnybear.library.model.network.CacheType;
 import com.sunnybear.library.model.network.callback.SimpleFastJsonSerializableCallback;
 import com.sunnybear.library.model.network.request.FormEncodingRequestBuilder;
@@ -14,7 +14,7 @@ import com.sunnybear.library.util.Logger;
 /**
  * Created by sunnybear on 16/1/29.
  */
-public class IndexActivity extends DispatchFragmentActivity<IndexViewBinder> {
+public class IndexActivity extends DispatchActivity<IndexViewBinder> {
     private Request request;
 
     @Override

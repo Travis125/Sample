@@ -2,12 +2,12 @@ package com.sunnybear.sample;
 
 import android.content.Context;
 
-import com.sunnybear.library.dispatch.DispatchFragmentActivity;
+import com.sunnybear.library.dispatch.DispatchActivity;
 
 /**
  * Created by sunnybear on 16/1/29.
  */
-public class NextActivity extends DispatchFragmentActivity<NextViewBinder> {
+public class NextActivity extends DispatchActivity<NextViewBinder> {
     @Override
     protected NextViewBinder getViewBinder(Context context) {
         return new NextViewBinder(context);
