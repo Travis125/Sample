@@ -75,7 +75,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
         //监听Home键
         registerReceiver(mBroadcastReceiver, Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         //分发model到Presenter
-        dispatchModel();
+        dispatchModel(savedInstanceState);
     }
 
     @Override
@@ -325,7 +325,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
     /**
      * 分发model到ViewBinder
      */
-    protected abstract void dispatchModel();
+    protected abstract void dispatchModel(@Nullable Bundle savedInstanceState);
 
     /**
      * 分发model到ViewBinder(onStart时调用)

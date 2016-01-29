@@ -1,10 +1,12 @@
 package com.sunnybear.sample;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
-import com.sunnybear.library.controller.eventbus.Subcriber;
 import com.sunnybear.library.dispatch.DispatchActivity;
 import com.sunnybear.library.util.ToastUtils;
+import com.sunnybear.library.util.eventbus.Subcriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class RecyclerViewActivity extends DispatchActivity<RecyclerViewViewBinde
     }
 
     @Override
-    protected void dispatchModel() {
+    protected void dispatchModel(@Nullable Bundle savedInstanceState) {
         List<String> strings = new ArrayList<>();
         for (int i = 1; i <= 50; i++) {
             strings.add("第" + i + "项");

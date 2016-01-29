@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.sunnybear.library.controller.eventbus.EventBusHelper;
 import com.sunnybear.library.dispatch.ViewBinder;
+import com.sunnybear.library.util.eventbus.EventBusHelper;
 
 import butterknife.Bind;
 import butterknife.OnClick;

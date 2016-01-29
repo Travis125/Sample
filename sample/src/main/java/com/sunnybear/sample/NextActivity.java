@@ -1,6 +1,8 @@
 package com.sunnybear.sample;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.sunnybear.library.dispatch.DispatchActivity;
 
@@ -14,7 +16,7 @@ public class NextActivity extends DispatchActivity<NextViewBinder> {
     }
 
     @Override
-    protected void dispatchModel() {
+    protected void dispatchModel(@Nullable Bundle savedInstanceState) {
 
     }
 

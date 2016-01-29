@@ -78,7 +78,7 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dispatchModel();
+        dispatchModel(savedInstanceState);
     }
 
     @Override
@@ -214,7 +214,7 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
     /**
      * 分发model到ViewBinder
      */
-    protected abstract void dispatchModel();
+    protected abstract void dispatchModel(@Nullable Bundle savedInstanceState);
 
     /**
      * 分发model到ViewBinder(onStart时调用)

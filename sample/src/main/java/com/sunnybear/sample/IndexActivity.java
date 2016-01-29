@@ -1,15 +1,17 @@
 package com.sunnybear.sample;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.squareup.okhttp.Request;
-import com.sunnybear.library.controller.eventbus.Subcriber;
 import com.sunnybear.library.dispatch.DispatchActivity;
 import com.sunnybear.library.model.network.CacheType;
 import com.sunnybear.library.model.network.callback.SimpleFastJsonSerializableCallback;
 import com.sunnybear.library.model.network.request.FormEncodingRequestBuilder;
 import com.sunnybear.library.model.network.request.RequestMethod;
 import com.sunnybear.library.util.Logger;
+import com.sunnybear.library.util.eventbus.Subcriber;
 
 /**
  * Created by sunnybear on 16/1/29.
@@ -23,7 +25,7 @@ public class IndexActivity extends DispatchActivity<IndexViewBinder> {
     }
 
     @Override
-    protected void dispatchModel() {
+    protected void dispatchModel(@Nullable Bundle savedInstanceState) {
         request = FormEncodingRequestBuilder.newInstance()
                 .addParam("a", "上海市")
                 .build(RequestMethod.GET, "http://gc.ditu.aliyun.com/geocoding");
