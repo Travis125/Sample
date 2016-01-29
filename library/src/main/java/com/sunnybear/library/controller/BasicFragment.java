@@ -16,11 +16,11 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.sunnybear.library.BasicApplication;
 import com.sunnybear.library.R;
-import com.sunnybear.library.controller.eventbus.EventBusHelper;
 import com.sunnybear.library.controller.intent.FragmentIntent;
 import com.sunnybear.library.model.network.OkHttpRequestHelper;
 import com.sunnybear.library.model.network.callback.RequestCallback;
 import com.sunnybear.library.util.DiskFileCacheHelper;
+import com.sunnybear.library.util.eventbus.EventBusHelper;
 import com.sunnybear.library.view.LoadingHUD;
 
 import java.io.Serializable;

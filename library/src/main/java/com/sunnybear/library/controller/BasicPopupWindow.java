@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
 import com.sunnybear.library.R;
-import com.sunnybear.library.controller.eventbus.EventBusHelper;
+import com.sunnybear.library.util.eventbus.EventBusHelper;
 import com.sunnybear.library.view.LoadingHUD;
 
 import butterknife.ButterKnife;

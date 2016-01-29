@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.sunnybear.library.controller.eventbus.matchpolicy;
+package com.sunnybear.library.util.eventbus.matchpolicy;
 
-import com.sunnybear.library.controller.eventbus.EventType;
+import com.sunnybear.library.util.eventbus.EventType;
 
 import java.util.List;
 

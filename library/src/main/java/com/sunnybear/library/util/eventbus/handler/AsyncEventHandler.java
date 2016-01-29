@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.sunnybear.library.controller.eventbus.handler;
+package com.sunnybear.library.util.eventbus.handler;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import com.sunnybear.library.controller.eventbus.Subscription;
+import com.sunnybear.library.util.eventbus.Subscription;
 
 /**
  * 事件的异步处理,将事件的处理函数执行在子线程中

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sunnybear.library.controller.eventbus;
+package com.sunnybear.library.util.eventbus;
 
 import java.lang.reflect.Method;
 

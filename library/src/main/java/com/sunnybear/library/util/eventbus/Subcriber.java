@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sunnybear.library.controller.eventbus;
+package com.sunnybear.library.util.eventbus;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -38,7 +38,7 @@ public @interface Subcriber {
 
     /**
      * 事件执行的线程,默认为主线程
-     * 
+     *
      * @return
      */
     ThreadMode mode() default ThreadMode.MAIN;

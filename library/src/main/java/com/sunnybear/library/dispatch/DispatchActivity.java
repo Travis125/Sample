@@ -19,13 +19,13 @@ import com.squareup.okhttp.Request;
 import com.sunnybear.library.BasicApplication;
 import com.sunnybear.library.R;
 import com.sunnybear.library.controller.ActivityManager;
-import com.sunnybear.library.controller.eventbus.EventBusHelper;
 import com.sunnybear.library.model.network.OkHttpRequestHelper;
 import com.sunnybear.library.model.network.callback.RequestCallback;
 import com.sunnybear.library.util.KeyboardUtils;
 import com.sunnybear.library.util.Logger;
 import com.sunnybear.library.util.StringUtils;
 import com.sunnybear.library.util.ToastUtils;
+import com.sunnybear.library.util.eventbus.EventBusHelper;
 import com.sunnybear.library.view.LoadingHUD;
 
 import java.util.ArrayList;

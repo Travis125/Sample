@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.sunnybear.library.controller.eventbus.handler;
+package com.sunnybear.library.util.eventbus.handler;
 
-import com.sunnybear.library.controller.eventbus.Subscription;
+import com.sunnybear.library.util.eventbus.Subscription;
 
 import java.lang.reflect.InvocationTargetException;
 

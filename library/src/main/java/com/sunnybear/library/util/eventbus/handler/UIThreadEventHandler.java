@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.sunnybear.library.controller.eventbus.handler;
+package com.sunnybear.library.util.eventbus.handler;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import com.sunnybear.library.controller.eventbus.Subscription;
+import com.sunnybear.library.util.eventbus.Subscription;
 
 /**
  * 事件处理在UI线程,通过Handler将事件处理post到UI线程的消息队列
@@ -33,7 +33,7 @@ public class UIThreadEventHandler implements EventHandler {
      */
     private Handler mUIHandler = new Handler(Looper.getMainLooper());
     /**
-     * 
+     *
      */
     DefaultEventHandler mEventHandler = new DefaultEventHandler();
 

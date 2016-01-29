@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.sunnybear.library.controller.eventbus;
+package com.sunnybear.library.util.eventbus;
 
-import com.sunnybear.library.controller.eventbus.handler.AsyncEventHandler;
-import com.sunnybear.library.controller.eventbus.handler.DefaultEventHandler;
-import com.sunnybear.library.controller.eventbus.handler.EventHandler;
-import com.sunnybear.library.controller.eventbus.handler.UIThreadEventHandler;
-import com.sunnybear.library.controller.eventbus.matchpolicy.DefaultMatchPolicy;
-import com.sunnybear.library.controller.eventbus.matchpolicy.MatchPolicy;
+import com.sunnybear.library.util.eventbus.handler.AsyncEventHandler;
+import com.sunnybear.library.util.eventbus.handler.DefaultEventHandler;
+import com.sunnybear.library.util.eventbus.handler.EventHandler;
+import com.sunnybear.library.util.eventbus.handler.UIThreadEventHandler;
+import com.sunnybear.library.util.eventbus.matchpolicy.DefaultMatchPolicy;
+import com.sunnybear.library.util.eventbus.matchpolicy.MatchPolicy;
 
 import java.util.List;
 import java.util.Map;
