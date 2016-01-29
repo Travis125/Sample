@@ -27,6 +27,13 @@
         android:layout_below="@id/btn_execute"
         android:text="播放视频"/>
 
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_player"
+        android:text="启动RecyclerViewActivity"/>
+
     <com.alexvasilkov.gestures.views.GestureFrameLayout
         android:id="@+id/fl_gesture"
         android:layout_width="match_parent"

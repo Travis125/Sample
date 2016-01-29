@@ -79,7 +79,7 @@ public abstract class LoadMoreAdapter<Item extends Serializable, VH extends Basi
     /**
      * 尾部视图
      */
-    static class FooterViewHolder extends BasicViewHolder<String, FooterViewHolder> {
+    static class FooterViewHolder extends BasicViewHolder<String> {
 
         public FooterViewHolder(View itemView) {
             super(itemView);
@@ -87,7 +87,7 @@ public abstract class LoadMoreAdapter<Item extends Serializable, VH extends Basi
         }
 
         @Override
-        public void onBindItem(FooterViewHolder holder, String s, int position) {
+        public void onBindItem(String s, int position) {
 
         }
     }

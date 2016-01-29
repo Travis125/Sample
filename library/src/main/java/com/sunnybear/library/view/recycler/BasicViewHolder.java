@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
  * 重新封装ViewHolder
  * Created by guchenkai on 2015/11/9.
  */
-public abstract class BasicViewHolder<Item extends Serializable, VH extends BasicViewHolder> extends RecyclerView.ViewHolder {
+public abstract class BasicViewHolder<Item extends Serializable> extends RecyclerView.ViewHolder {
 
     public BasicViewHolder(View itemView) {
         super(itemView);
@@ -21,9 +21,8 @@ public abstract class BasicViewHolder<Item extends Serializable, VH extends Basi
     /**
      * 向itemView上绑定数据
      *
-     * @param holder   ViewHolder
      * @param item     item数据
      * @param position 该条数据的位置
      */
-    public abstract void onBindItem(VH holder, Item item, int position);
+    public abstract void onBindItem(Item item, int position);
 }

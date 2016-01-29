@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -21,9 +20,7 @@ import com.sunnybear.library.controller.eventbus.EventBusHelper;
 import com.sunnybear.library.controller.intent.FragmentIntent;
 import com.sunnybear.library.model.network.OkHttpRequestHelper;
 import com.sunnybear.library.model.network.callback.RequestCallback;
-import com.sunnybear.library.model.network.callback.SimpleFastJsonCallback;
 import com.sunnybear.library.util.DiskFileCacheHelper;
-import com.sunnybear.library.util.StringUtils;
 import com.sunnybear.library.view.LoadingHUD;
 
 import java.io.Serializable;
@@ -78,7 +75,7 @@ public abstract class BasicFragment<App extends BasicApplication> extends Fragme
         super.onAttach(activity);
         mActivity = (BasicFragmentActivity) activity;
         mApp = (App) mActivity.getApplication();
-        mOkHttpClient = BasicApplication.getOkHttpClient();
+        mOkHttpClient = mApp.getOkHttpClient();
         this.loading = mActivity.loading;
         mDiskFileCacheHelper = mApp.getDiskFileCacheHelper();
 

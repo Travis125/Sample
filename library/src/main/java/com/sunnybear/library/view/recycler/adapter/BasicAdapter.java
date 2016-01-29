@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.sunnybear.library.controller.BasicFragmentActivity;
 import com.sunnybear.library.util.Logger;
 import com.sunnybear.library.util.PhoneUtil;
 import com.sunnybear.library.view.recycler.BasicViewHolder;
@@ -27,7 +26,7 @@ import java.util.List;
  * Created by guchenkai on 2015/11/9.
  */
 public abstract class BasicAdapter<Item extends Serializable, VH extends BasicViewHolder> extends RecyclerView.Adapter<VH> {
-    protected BasicFragmentActivity context;
+    protected Context context;
     protected List<Item> mItems;
     private OnItemClickListener<Item> mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
@@ -57,7 +56,7 @@ public abstract class BasicAdapter<Item extends Serializable, VH extends BasicVi
     }
 
     public BasicAdapter(Context context, List<Item> items) {
-        this.context = (BasicFragmentActivity) context;
+        this.context = context;
         this.mItems = items != null ? items : new ArrayList<Item>();
         mInterpolator = new LinearInterpolator();
     }
@@ -164,7 +163,7 @@ public abstract class BasicAdapter<Item extends Serializable, VH extends BasicVi
         });
         if (isStartAnimation)
             setAnimator(holder.itemView, position);
-        holder.onBindItem(holder, item, position);
+        holder.onBindItem(item, position);
     }
 
     /**

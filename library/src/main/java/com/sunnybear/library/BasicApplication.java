@@ -26,10 +26,10 @@ import de.greenrobot.dao.query.QueryBuilder;
  */
 public abstract class BasicApplication extends Application {
     private static Context mContext;
-    private static OkHttpClient mOkHttpClient;//OkHttpClient
+    private OkHttpClient mOkHttpClient;//OkHttpClient
     private static int maxAge;//网络缓存最大时间
 
-    private static DiskFileCacheHelper mDiskFileCacheHelper;//磁盘文件缓存器
+    private DiskFileCacheHelper mDiskFileCacheHelper;//磁盘文件缓存器
 
     public static boolean isDebug;
     public static String sdCardPath;//SdCard路径
@@ -80,19 +80,15 @@ public abstract class BasicApplication extends Application {
         });
     }
 
-    public static Context getInstance() {
-        return mContext;
+    public static BasicApplication getInstance() {
+        return (BasicApplication) mContext;
     }
 
-    public static OkHttpClient getOkHttpClient() {
+    public OkHttpClient getOkHttpClient() {
         return mOkHttpClient;
     }
 
-    public static int getMaxAge() {
-        return maxAge;
-    }
-
-    public static DiskFileCacheHelper getDiskFileCacheHelper() {
+    public DiskFileCacheHelper getDiskFileCacheHelper() {
         return mDiskFileCacheHelper;
     }
 

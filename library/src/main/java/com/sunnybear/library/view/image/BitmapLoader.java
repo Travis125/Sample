@@ -25,7 +25,7 @@ public class BitmapLoader {
     }
 
     public BitmapLoader(Activity activity) {
-        mOkHttpClient = BasicApplication.getOkHttpClient();
+        mOkHttpClient = BasicApplication.getInstance().getOkHttpClient();
         mActivity = activity;
     }
 

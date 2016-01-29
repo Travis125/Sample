@@ -32,7 +32,7 @@ public class OkHttpRequestHelper {
 
     public OkHttpRequestHelper() {
         if (mOkHttpClient == null)
-            mOkHttpClient = BasicApplication.getOkHttpClient();
+            mOkHttpClient = BasicApplication.getInstance().getOkHttpClient();
         mCacheType = CacheType.NETWORK_ELSE_CACHE;//默认是先请求网络,再请求缓存
     }
 

@@ -1,11 +1,9 @@
 package com.sunnybear.library.model.network.request;
 
-import com.squareup.okhttp.CacheControl;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
-import com.sunnybear.library.BasicApplication;
 import com.sunnybear.library.model.network.progress.ProgressRequestBody;
 import com.sunnybear.library.model.network.progress.ProgressRequestListener;
 import com.sunnybear.library.util.Logger;
@@ -13,7 +11,6 @@ import com.sunnybear.library.util.Logger;
 import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * form-data请求构建类
@@ -34,7 +31,7 @@ public class MultiPartRequestBuilder {
         params = new ConcurrentHashMap<>();
 
         builder = new Request.Builder();
-        builder.cacheControl(new CacheControl.Builder().maxAge(BasicApplication.getMaxAge(), TimeUnit.SECONDS).build());
+//        builder.cacheControl(new CacheControl.Builder().maxAge(BasicApplication.getMaxAge(), TimeUnit.SECONDS).build());
     }
 
     public MultiPartRequestBuilder setProgressRequestListener(ProgressRequestListener progressRequestListener) {
