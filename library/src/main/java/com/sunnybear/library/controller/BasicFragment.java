@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
  * 基础Fragment
  * Created by guchenkai on 2015/11/19.
  */
+@Deprecated
 public abstract class BasicFragment<App extends BasicApplication> extends Fragment {
     private View mFragmentView = null;
     protected BasicFragmentActivity mActivity;

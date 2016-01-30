@@ -42,6 +42,7 @@ import butterknife.ButterKnife;
  * 基础FragmentActivity
  * Created by guchenkai on 2015/11/19.
  */
+@Deprecated
 public abstract class BasicFragmentActivity<App extends BasicApplication> extends AppCompatActivity {
     private static final int WHAT_ON_HOME_CLICK = 0x1;
     protected Context mContext;
