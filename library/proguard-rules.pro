@@ -15,3 +15,30 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+#指定代码的压缩级别
+-optimizationpasses 5
+#包名不混合大小写
+-dontusemixedcaseclassnames
+#不去忽略非公共类库
+-dontskipnonpubliclibraryclasses
+#是否优化输入的类文件
+-dontoptimize
+#预校检
+-dontpreverify
+#混淆时是否记录日志
+-verbose fales
+#混淆时所采用的算法
+-optimizations !code/simplification/arithmetic,field/*,!class/merging/*
+#注解保护
+-keepattributes *Annotation*
+#保持不混淆的类
+-keep public class * extends android.app.Fragment
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending licensing.ILicesingService
+-keep public class * extends android.support.v4.app.Fragment
+
