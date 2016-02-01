@@ -113,6 +113,12 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
         unregisterReceiver(mBroadcastReceiver);
     }
 
+    @Override
+    public void finish() {
+        ActivityManager.getInstance().finishCurrentActivity();
+        super.finish();
+    }
+
     /**
      * 注册广播接收器
      *
