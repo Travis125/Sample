@@ -24,6 +24,7 @@ public class TestFragmentActivity extends DispatchActivity<TestFragmentActivity.
 
     @Override
     protected void dispatchModel(@Nullable Bundle savedInstanceState) {
+        setAnim(R.anim.next_in, R.anim.next_out, R.anim.quit_in, R.anim.quit_out);
         addFragment(FirstFragment.class, StackManager.SINGLE_TOP);
     }
 

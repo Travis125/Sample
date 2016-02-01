@@ -133,7 +133,7 @@ public class StackManager implements HandlerFragment {
      * @param from      当前Fragment
      * @param to        目标Fragment
      * @param args      传递参数
-     * @param stackMode 任务栈模式
+     * @param stackMode 任务栈模式`
      */
     public void switchFragment(DispatchFragment from, DispatchFragment to, Bundle args, @StackMode int stackMode) {
         if (args != null) to.setArguments(args);

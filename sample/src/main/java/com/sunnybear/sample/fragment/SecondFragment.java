@@ -27,12 +27,13 @@ public class SecondFragment extends DispatchFragment<SecondFragment.SecondFragme
 
     @Override
     protected void dispatchModel(@Nullable Bundle savedInstanceState) {
-
+        setAnim(R.anim.next_in, R.anim.next_out, R.anim.quit_in, R.anim.quit_out);
+        Logger.d("SecondFragment---onCreated");
     }
 
     @Override
     protected void dispatchModelOnStart() {
-
+        Logger.d("SecondFragment---onStart");
     }
 
     @Override
