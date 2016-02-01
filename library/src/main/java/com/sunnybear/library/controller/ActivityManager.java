@@ -3,7 +3,8 @@ package com.sunnybear.library.controller;
 import android.app.Activity;
 import android.content.Context;
 
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Activity管理工具类,将activity放入栈统一管理
@@ -11,12 +12,12 @@ import java.util.Stack;
  */
 public class ActivityManager {
     //activity管理栈
-    private volatile Stack<Activity> activityStack;
+    private volatile List<Activity> activityStack;
     //全局单例
     private static volatile ActivityManager instance;
 
     public ActivityManager() {
-        activityStack = new Stack<>();
+        activityStack = new ArrayList<>();
     }
 
     /**
@@ -45,7 +46,7 @@ public class ActivityManager {
      * @return 栈顶的activity
      */
     public Activity getCurrentActivity() {
-        return activityStack.lastElement();
+        return activityStack.get(activityStack.size() - 1);
     }
 
     /**
