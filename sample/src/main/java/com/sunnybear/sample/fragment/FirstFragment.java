@@ -42,6 +42,16 @@ public class FirstFragment extends DispatchFragment<FirstFragment.FirstFragmentV
     }
 
     @Override
+    public void onNowHidden() {
+        Logger.d("firstFragment----onNowHidden");
+    }
+
+    @Override
+    public void onNextShow() {
+        Logger.d("firstFragment----onNextShow");
+    }
+
+    @Override
     protected String[] getRequestUrls() {
         return new String[0];
     }
