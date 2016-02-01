@@ -37,7 +37,7 @@ public class FirstFragment extends DispatchFragment<FirstFragment.FirstFragmentV
     }
 
     @Override
-    public void onNewIntent() {
+    public void onNewIntent(Bundle arg) {
         Logger.d("firstFragment重新启动");
     }
 

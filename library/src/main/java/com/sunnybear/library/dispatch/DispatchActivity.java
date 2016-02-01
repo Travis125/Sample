@@ -235,33 +235,12 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
      *
      * @param targetClass 目标fragmentClass
      * @param args        传递参数
-     * @param stackMode   任务栈模式
      */
-    protected void addFragment(Class<? extends Fragment> targetClass, Bundle args, int stackMode) {
+    protected void addFragment(Class<? extends Fragment> targetClass, Bundle args) {
         Fragment fragment = Fragment.instantiate(mContext, targetClass.getName(), args);
         if (!(fragment instanceof DispatchFragment))
             throw new RuntimeException("添加的Fragment必须是DispatchFragment子类");
-        manager.setFragment((DispatchFragment) fragment, stackMode);
-    }
-
-    /**
-     * 添加fragment
-     *
-     * @param targetClass 目标fragmentClass
-     * @param stackMode   任务栈模式
-     */
-    protected void addFragment(Class<? extends Fragment> targetClass, int stackMode) {
-        addFragment(targetClass, null, stackMode);
-    }
-
-    /**
-     * 添加fragment
-     *
-     * @param targetClass 目标fragmentClass
-     * @param args        传递参数
-     */
-    protected void addFragment(Class<? extends Fragment> targetClass, Bundle args) {
-        addFragment(targetClass, args, StackManager.STANDARD);
+        manager.setFragment((DispatchFragment) fragment);
     }
 
     /**
@@ -270,8 +249,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
      * @param targetClass 目标fragmentClass
      */
     protected void addFragment(Class<? extends Fragment> targetClass) {
-        addFragment(targetClass, null, StackManager.STANDARD
-        );
+        addFragment(targetClass, null);
     }
 
     /**

@@ -61,33 +61,11 @@ public class StackManager implements HandlerFragment {
      *
      * @param fragment fragment实例
      */
-    public void setFragment(@NonNull DispatchFragment fragment, int stackMode) {
+    public void setFragment(@NonNull DispatchFragment fragment) {
         FragmentTransaction transaction = context.getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.fragment_container, fragment, fragment.getClass().getName()).commit();
-        switch (stackMode) {
-            case STANDARD:
-                stack.putStandard(fragment);
-                break;
-            case SINGLE_TOP:
-                stack.putSingleTop(fragment);
-                break;
-            case SINGLE_TASK:
-                stack.putSingleTask(fragment);
-                break;
-            case SINGLE_INSTANCE:
-                stack.putSingleInstance(fragment);
-                break;
-        }
-    }
-
-    /**
-     * 设置最底部的Fragment
-     *
-     * @param fragment fragment实例
-     */
-    public void setFragment(@NonNull DispatchFragment fragment) {
-        setFragment(fragment, STANDARD);
+        stack.putStandard(fragment);
     }
 
     /**
@@ -143,7 +121,7 @@ public class StackManager implements HandlerFragment {
                 switchFragment(from, to);
                 break;
             case SINGLE_TOP:
-                if (!stack.putSingleTop(to))
+                if (!stack.putSingleTop(to, args))
                     switchFragment(from, to);
                 break;
             case SINGLE_TASK:

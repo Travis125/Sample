@@ -1,5 +1,6 @@
 package com.sunnybear.library.dispatch.fragmentstack;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.sunnybear.library.dispatch.DispatchFragment;
@@ -38,15 +39,15 @@ public class FragmentStack {
      * @param fragment 被添加的Fragment
      * @return 是否包含当前Fragment实例
      */
-    public boolean putSingleTop(DispatchFragment fragment) {
+    public boolean putSingleTop(DispatchFragment fragment, Bundle args) {
         ArrayList<DispatchFragment> lastList = stackList.get(stackList.size() - 1);
         if (lastList.isEmpty()) {
             lastList.add(fragment);
             return false;
         } else {
-            DispatchFragment last = lastList.get(lastList.size() - 1);
-            if (StringUtils.equals(last.getClass().getName(), fragment.getClass().getName())) {
-                fragment.onNewIntent();
+//            DispatchFragment last = lastList.get(lastList.size() - 1);
+            if (matchName(lastList, fragment)) {
+                fragment.onNewIntent(args);
                 return true;
             } else {
                 lastList.add(fragment);
@@ -140,5 +141,21 @@ public class FragmentStack {
             }
         }
         return fragments;
+    }
+
+    /**
+     * 匹配fragment名
+     *
+     * @param fragments Fragment组
+     * @param fragment  fragment
+     * @return 是否有匹配
+     */
+    private boolean matchName(ArrayList<DispatchFragment> fragments, DispatchFragment fragment) {
+        boolean isMatch = false;
+        for (DispatchFragment f : fragments) {
+            isMatch = StringUtils.equals(f.getClass().getName(), fragment.getClass().getName());
+            if (isMatch) break;
+        }
+        return isMatch;
     }
 }

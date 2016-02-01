@@ -313,7 +313,7 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
     }
 
     @Override
-    public void onNewIntent() {
+    public void onNewIntent(Bundle args) {
 
     }
 
