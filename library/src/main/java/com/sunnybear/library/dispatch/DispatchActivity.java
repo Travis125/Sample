@@ -115,7 +115,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
 
     @Override
     public void finish() {
-        ActivityManager.getInstance().finishCurrentActivity();
+//        ActivityManager.getInstance().finishCurrentActivity();
         super.finish();
     }
 
