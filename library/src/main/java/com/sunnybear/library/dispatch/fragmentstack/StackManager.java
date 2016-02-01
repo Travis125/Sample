@@ -25,13 +25,12 @@ public class StackManager implements HandlerFragment {
     public static final int SINGLE_TASK = 0X33;
     public static final int SINGLE_INSTANCE = 0X44;
 
-    public static boolean isFirstclose = true;
+    public static boolean isFirstClose = true;
 
     private FragmentStack stack;
     private final FragmentActivity context;
     private long CLICK_SPACE = 300;
     private long currentTime;
-    private int currentMode;
     private int nextIn;
     private int nextOut;
     private int quitIn;
@@ -274,7 +273,7 @@ public class StackManager implements HandlerFragment {
 
     @Override
     public void close(final DispatchFragment fragment) {
-        if (isFirstclose) {
+        if (isFirstClose) {
             View view = fragment.getView();
             if (view != null && next_out != null) {
                 view.startAnimation(next_out);
@@ -297,7 +296,7 @@ public class StackManager implements HandlerFragment {
             } else {
                 closeFragment(fragment);
             }
-            isFirstclose = false;
+            isFirstClose = false;
         } else {
             closeFragment(fragment);
         }

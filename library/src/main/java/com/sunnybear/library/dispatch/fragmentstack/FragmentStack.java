@@ -81,7 +81,7 @@ public class FragmentStack {
             } else {
                 if (listener != null) {
                     listener.show(lastList.get(tempIndex));
-                    StackManager.isFirstclose = true;
+                    StackManager.isFirstClose = true;
                     for (int i = lastList.size() - 1; i > tempIndex; i--) {
                         listener.close(lastList.get(i));
                     }
