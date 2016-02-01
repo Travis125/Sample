@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
     protected VB mViewBinder;
 
     private Bundle args;
-    private FragmentManager mFragmentManager;
     private View mFragmentView = null;
 
     @Override
@@ -51,7 +49,6 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
         mApplication = (BasicApplication) activity.getApplication();
         this.loading = LoadingHUD.getInstance(mContext);
         loading.setSpinnerType(LoadingHUD.FADED_ROUND_SPINNER);
-        mFragmentManager = activity.getSupportFragmentManager();
     }
 
     @Override
