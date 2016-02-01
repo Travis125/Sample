@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * Fragment意图
  * Created by guchenkai on 2015/10/30.
  */
+@Deprecated
 public class FragmentIntent {
     private Bundle mExtras;
     private Fragment mCurrentFragment;

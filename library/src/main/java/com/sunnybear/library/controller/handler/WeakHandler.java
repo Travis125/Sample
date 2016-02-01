@@ -47,6 +47,7 @@ import java.lang.ref.WeakReference;
  *
  * Created by Dmytro Voronkevych on 17/06/2014.
  */
+@Deprecated
 public class WeakHandler {
     private final Handler.Callback mCallback; // hard reference to Callback. We need to keep callback in memory
     private final ExecHandler mExec;
