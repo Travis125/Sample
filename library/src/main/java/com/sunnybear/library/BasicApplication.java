@@ -8,6 +8,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.sunnybear.library.model.network.OkHttpManager;
 import com.sunnybear.library.model.network.interceptor.NetworkInterceptor;
 import com.sunnybear.library.model.network.interceptor.ResponseInfoInterceptor;
+import com.sunnybear.library.util.AppUtils;
 import com.sunnybear.library.util.CrashHandler;
 import com.sunnybear.library.util.DiskFileCacheHelper;
 import com.sunnybear.library.util.Logger;
@@ -52,7 +53,7 @@ public abstract class BasicApplication extends Application {
         //ButterKnife的Debug模式
         ButterKnife.setDebug(isDebug());
         //偏好设置文件初始化
-        Hawk.init(getApplicationContext(), getPackageName(), isDebug() ? LogLevel.FULL : LogLevel.NONE);
+        Hawk.init(getApplicationContext(), AppUtils.getPackageName(getApplicationContext()), isDebug() ? LogLevel.FULL : LogLevel.NONE);
         //日志输出
         Logger.init(getLogTag()).hideThreadInfo().setLogLevel(isDebug() ? Logger.LogLevel.FULL : Logger.LogLevel.NONE);
         //OkHttp初始化

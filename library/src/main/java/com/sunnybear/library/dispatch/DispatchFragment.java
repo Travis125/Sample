@@ -2,11 +2,12 @@ package com.sunnybear.library.dispatch;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.AnimRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,8 @@ import android.view.ViewGroup;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.sunnybear.library.BasicApplication;
-import com.sunnybear.library.R;
-import com.sunnybear.library.controller.intent.FragmentIntent;
+import com.sunnybear.library.dispatch.fragmentstack.OnNewIntent;
+import com.sunnybear.library.dispatch.fragmentstack.StackManager;
 import com.sunnybear.library.model.network.OkHttpRequestHelper;
 import com.sunnybear.library.model.network.callback.RequestCallback;
 import com.sunnybear.library.util.eventbus.EventBusHelper;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
  * 基础Fragment,主管模组分发
  * Created by sunnybear on 16/1/29.
  */
-public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragment implements Dispatch {
+public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragment implements Dispatch, OnNewIntent {
     protected Context mContext;
     protected BasicApplication mApplication;
     protected LoadingHUD loading;
@@ -78,6 +79,10 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewBinder.onBindView(args != null ? args : new Bundle());
+        mViewBinder.onViewCreatedFinish();
+        mViewBinder.addListener();
+
         dispatchModel(savedInstanceState);
     }
 
@@ -170,38 +175,146 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
         networkRequest(request, -1, callback);
     }
 
+//    /**
+//     * 启动Fragment
+//     *
+//     * @param intent Fragment意图
+//     */
+//    private void startFragment(FragmentIntent intent) {
+//        Fragment current = intent.getCurrentFragment();
+//        Class<? extends Fragment> targetFragmentClass = intent.getTargetFragmentClazz();
+//        Bundle args = intent.getExtras();
+//        Fragment target = null;
+//        if (args != null)
+//            target = Fragment.instantiate(mContext, targetFragmentClass.getName(), args);
+//        else
+//            target = Fragment.instantiate(mContext, targetFragmentClass.getName());
+//        switchFragment(current, target);
+//    }
+//
+//    /**
+//     * 切换Fragment
+//     *
+//     * @param current 当前fragment
+//     * @param target  目标fragment
+//     */
+//    private void switchFragment(Fragment current, Fragment target) {
+//        FragmentTransaction transaction = mFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+//        String targetName = target.getClass().getName();
+//        if (current != null)
+//            transaction.replace(R.id.fragment_container, target, targetName).addToBackStack(targetName);
+//        else
+//            transaction.add(R.id.fragment_container, target, targetName);
+//        transaction.commit();
+//    }
+
     /**
-     * 启动Fragment
+     * 获得根Activity
      *
-     * @param intent Fragment意图
+     * @return 根activity实例
      */
-    private void startFragment(FragmentIntent intent) {
-        Fragment current = intent.getCurrentFragment();
-        Class<? extends Fragment> targetFragmentClass = intent.getTargetFragmentClazz();
-        Bundle args = intent.getExtras();
-        Fragment target = null;
-        if (args != null)
-            target = Fragment.instantiate(mContext, targetFragmentClass.getName(), args);
+    public DispatchActivity getRoot() {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof DispatchActivity)
+            return (DispatchActivity) activity;
         else
-            target = Fragment.instantiate(mContext, targetFragmentClass.getName());
-        switchFragment(current, target);
+            throw new ClassCastException("this activity mast be extends DispatchActivity");
     }
 
     /**
-     * 切换Fragment
+     * 切换新的Fragment
      *
-     * @param current 当前fragment
-     * @param target  目标fragment
+     * @param fragmentClass 新Fragment类型
+     * @param args          传递参数
      */
-    private void switchFragment(Fragment current, Fragment target) {
-        FragmentTransaction transaction = mFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        String targetName = target.getClass().getName();
-        if (current != null)
-            transaction.replace(R.id.fragment_container, target, targetName).addToBackStack(targetName);
+    public void open(@NonNull Class<? extends DispatchFragment> fragmentClass, Bundle args, int stackMode) {
+        DispatchFragment fragment = (DispatchFragment) Fragment.instantiate(mContext, fragmentClass.getName(), args);
+        getRoot().manager.switchFragment(this, fragment, args, stackMode);
+    }
+
+    /**
+     * 切换新的Fragment
+     *
+     * @param fragmentClass 新Fragment类型
+     * @param args          传递参数
+     */
+    public void open(@NonNull Class<? extends DispatchFragment> fragmentClass, Bundle args) {
+        open(fragmentClass, args, StackManager.STANDARD);
+    }
+
+    /**
+     * 切换新的Fragment
+     *
+     * @param fragmentClass 新Fragment类型
+     * @param stackMode     任务栈模式
+     */
+    public void open(@NonNull Class<? extends DispatchFragment> fragmentClass, int stackMode) {
+        open(fragmentClass, null, stackMode);
+    }
+
+    /**
+     * 切换新的Fragment
+     *
+     * @param fragmentClass 新Fragment类型
+     */
+    public void open(@NonNull Class<? extends DispatchFragment> fragmentClass) {
+        open(fragmentClass, null, StackManager.STANDARD);
+    }
+
+    /**
+     * 设置动画
+     *
+     * @param nextIn  下一页进入动画
+     * @param nextOut 下一页动画
+     * @param quitIn  当前页面的动画
+     * @param quitOut 退出当前页面的动画
+     */
+    public void setAnim(@AnimRes int nextIn, @AnimRes int nextOut, @AnimRes int quitIn, @AnimRes int quitOut) {
+        getRoot().manager.setAnim(nextIn, nextOut, quitIn, quitOut);
+    }
+
+    /**
+     * 关闭当前fragment
+     */
+    public void close() {
+        getRoot().manager.close(this);
+    }
+
+    /**
+     * 关闭指定的Fragment
+     *
+     * @param fragment fragment实例
+     */
+    public void close(DispatchFragment fragment) {
+        getRoot().manager.close(fragment);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden)
+            onNowHidden();
         else
-            transaction.add(R.id.fragment_container, target, targetName);
-        transaction.commit();
+            onNextShow();
+    }
+
+    /**
+     * 当前页面暂停交互时的回调
+     */
+    public void onNowHidden() {
+
+    }
+
+    /**
+     * 当前页面重启交互时的回调
+     */
+    public void onNextShow() {
+
+    }
+
+    @Override
+    public void onNewIntent() {
+
     }
 
     /**

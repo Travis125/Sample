@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.AnimRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -17,8 +19,9 @@ import android.widget.EditText;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.sunnybear.library.BasicApplication;
-import com.sunnybear.library.R;
 import com.sunnybear.library.controller.ActivityManager;
+import com.sunnybear.library.dispatch.fragmentstack.OnKeyDownCallback;
+import com.sunnybear.library.dispatch.fragmentstack.StackManager;
 import com.sunnybear.library.model.network.OkHttpRequestHelper;
 import com.sunnybear.library.model.network.callback.RequestCallback;
 import com.sunnybear.library.util.KeyboardUtils;
@@ -48,6 +51,13 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
     //Home键广播接受器
     private HomeBroadcastReceiver mBroadcastReceiver = new HomeBroadcastReceiver();
 
+    StackManager manager;
+    private OnKeyDownCallback callback;
+
+    public void setOnKeyDownCallback(OnKeyDownCallback callback) {
+        this.callback = callback;
+    }
+
     @Override
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +85,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
         //监听Home键
         registerReceiver(mBroadcastReceiver, Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         //分发model到Presenter
+        manager = new StackManager(this);
         dispatchModel(savedInstanceState);
     }
 
@@ -176,27 +187,6 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
     }
 
     /**
-     * 添加fragment
-     *
-     * @param targetClass 目标fragmentClass
-     * @param args        传递参数
-     */
-    protected void addFragment(Class<? extends Fragment> targetClass, Bundle args) {
-        String fragmentName = targetClass.getName();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, Fragment.instantiate(mContext, fragmentName, args), fragmentName).commit();
-    }
-
-    /**
-     * 添加fragment
-     *
-     * @param targetClass 目标fragmentClass
-     */
-    protected void addFragment(Class<? extends Fragment> targetClass) {
-        addFragment(targetClass, null);
-    }
-
-    /**
      * 跳转Activity
      *
      * @param targetClass 目标Activity类型
@@ -240,6 +230,62 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
         startService(targetClass, null);
     }
 
+    /**
+     * 添加fragment
+     *
+     * @param targetClass 目标fragmentClass
+     * @param args        传递参数
+     * @param stackMode   任务栈模式
+     */
+    protected void addFragment(Class<? extends Fragment> targetClass, Bundle args, int stackMode) {
+        Fragment fragment = Fragment.instantiate(mContext, targetClass.getName(), args);
+        if (!(fragment instanceof DispatchFragment))
+            throw new RuntimeException("添加的Fragment必须是DispatchFragment子类");
+        manager.setFragment((DispatchFragment) fragment, stackMode);
+    }
+
+    /**
+     * 添加fragment
+     *
+     * @param targetClass 目标fragmentClass
+     * @param stackMode   任务栈模式
+     */
+    protected void addFragment(Class<? extends Fragment> targetClass, int stackMode) {
+        addFragment(targetClass, null, stackMode);
+    }
+
+    /**
+     * 添加fragment
+     *
+     * @param targetClass 目标fragmentClass
+     * @param args        传递参数
+     */
+    protected void addFragment(Class<? extends Fragment> targetClass, Bundle args) {
+        addFragment(targetClass, args, StackManager.STANDARD);
+    }
+
+    /**
+     * 添加fragment
+     *
+     * @param targetClass 目标fragmentClass
+     */
+    protected void addFragment(Class<? extends Fragment> targetClass) {
+        addFragment(targetClass, null, StackManager.STANDARD
+        );
+    }
+
+    /**
+     * 设置动画
+     *
+     * @param nextIn  下一页进入动画
+     * @param nextOut 下一页动画
+     * @param quitIn  当前页面的动画
+     * @param quitOut 退出当前页面的动画
+     */
+    protected void setAnim(@AnimRes int nextIn, @AnimRes int nextOut, @AnimRes int quitIn, @AnimRes int quitOut) {
+        manager.setAnim(nextIn, nextOut, quitIn, quitOut);
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev != null && ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -250,6 +296,19 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
         }
         //必不可少,否则所有的组件都不会有TouchEvent事件了
         return getWindow().superDispatchTouchEvent(ev) || onTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                manager.onBackPressed();
+                return true;
+            default:
+                if (callback != null)
+                    return callback.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**

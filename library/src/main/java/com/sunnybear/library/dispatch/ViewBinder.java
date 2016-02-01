@@ -9,11 +9,11 @@ import android.os.Bundle;
  * 绑定View实例
  * Created by sunnybear on 16/1/29.
  */
-public abstract class ViewBinder<AC extends Dispatch> implements ViewModelBridge {
-    protected AC mContext;
+public abstract class ViewBinder<D extends Dispatch> implements ViewModelBridge {
+    protected D mContext;
 
     public ViewBinder(Context context) {
-        mContext = (AC) context;
+        mContext = (D) context;
         if (!(mContext instanceof DispatchActivity))
             throw new RuntimeException("ViewBinder中的Content必须是DispatchActivity类型");
     }
