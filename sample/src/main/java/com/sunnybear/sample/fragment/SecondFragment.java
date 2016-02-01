@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.sunnybear.library.dispatch.DispatchFragment;
 import com.sunnybear.library.dispatch.ViewBinder;
-import com.sunnybear.library.dispatch.fragmentstack.StackManager;
 import com.sunnybear.library.util.Logger;
 import com.sunnybear.sample.R;
 
@@ -75,7 +74,6 @@ public class SecondFragment extends DispatchFragment<SecondFragment.SecondFragme
             switch (v.getId()) {
                 case R.id.btn_start:
                     Logger.d("启动下一个Fragment");
-                    open(FirstFragment.class, StackManager.SINGLE_TOP);
                     break;
             }
         }
