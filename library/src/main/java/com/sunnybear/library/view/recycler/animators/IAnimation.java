@@ -9,5 +9,5 @@ import android.view.View;
  */
 public interface IAnimation {
 
-    Animator[] getAnimators(View view);
+    Animator[] getAnimators(View itemView);
 }

@@ -21,9 +21,9 @@ public class AlphaInAnimation implements IAnimation {
     }
 
     @Override
-    public Animator[] getAnimators(View view) {
+    public Animator[] getAnimators(View itemView) {
         return new Animator[]{
-                ObjectAnimator.ofFloat(view, "alpha", mFrom, 1.0F)
+                ObjectAnimator.ofFloat(itemView, "alpha", mFrom, 1.0F)
         };
     }
 }

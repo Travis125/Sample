@@ -11,9 +11,9 @@ import android.view.View;
 public class SlideInBottomAnimation implements IAnimation {
 
     @Override
-    public Animator[] getAnimators(View view) {
+    public Animator[] getAnimators(View itemView) {
         return new Animator[]{
-                ObjectAnimator.ofFloat(view, "translationY", view.getMeasuredHeight(), 0)
+                ObjectAnimator.ofFloat(itemView, "translationY", itemView.getMeasuredHeight(), 0)
         };
     }
 }

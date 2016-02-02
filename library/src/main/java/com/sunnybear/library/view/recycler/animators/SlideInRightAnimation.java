@@ -10,9 +10,9 @@ import android.view.View;
  */
 public class SlideInRightAnimation implements IAnimation {
     @Override
-    public Animator[] getAnimators(View view) {
+    public Animator[] getAnimators(View itemView) {
         return new Animator[]{
-                ObjectAnimator.ofFloat(view, "translationX", view.getRootView().getWidth(), 0)
+                ObjectAnimator.ofFloat(itemView, "translationX", itemView.getRootView().getWidth(), 0)
         };
     }
 }

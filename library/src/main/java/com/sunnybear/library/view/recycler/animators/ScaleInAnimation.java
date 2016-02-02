@@ -21,10 +21,10 @@ public class ScaleInAnimation implements IAnimation {
     }
 
     @Override
-    public Animator[] getAnimators(View view) {
+    public Animator[] getAnimators(View itemView) {
         return new Animator[]{
-                ObjectAnimator.ofFloat(view, "scaleX", mFrom, 1.0F),
-                ObjectAnimator.ofFloat(view, "scaleY", mFrom, 1.0F)
+                ObjectAnimator.ofFloat(itemView, "scaleX", mFrom, 1.0F),
+                ObjectAnimator.ofFloat(itemView, "scaleY", mFrom, 1.0F)
         };
     }
 }
