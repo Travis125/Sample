@@ -43,7 +43,7 @@ import butterknife.ButterKnife;
 public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCompatActivity implements Dispatch {
     protected static final String EVENT_HOME_CLICK = "home_click";//点击Home键的EventBus标签
 
-    private Context mContext;
+    protected Context mContext;
     protected BasicApplication mApplication;
     protected VB mViewBinder;
     protected LoadingHUD loading;

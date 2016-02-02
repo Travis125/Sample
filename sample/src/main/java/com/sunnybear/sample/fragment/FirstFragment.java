@@ -32,7 +32,7 @@ public class FirstFragment extends DispatchFragment<FirstFragment.FirstFragmentV
     }
 
     @Override
-    protected void dispatchModelOnStart() {
+    public void dispatchModelOnStart() {
         Logger.d("FirstFragment---onStart");
     }
 

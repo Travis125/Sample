@@ -32,7 +32,7 @@ public class SecondFragment extends DispatchFragment<SecondFragment.SecondFragme
     }
 
     @Override
-    protected void dispatchModelOnStart() {
+    public void dispatchModelOnStart() {
         Logger.d("SecondFragment---onStart");
     }
 

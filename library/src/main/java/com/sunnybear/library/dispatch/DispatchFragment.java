@@ -172,40 +172,6 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
         networkRequest(request, -1, callback);
     }
 
-//    /**
-//     * 启动Fragment
-//     *
-//     * @param intent Fragment意图
-//     */
-//    private void startFragment(FragmentIntent intent) {
-//        Fragment current = intent.getCurrentFragment();
-//        Class<? extends Fragment> targetFragmentClass = intent.getTargetFragmentClazz();
-//        Bundle args = intent.getExtras();
-//        Fragment target = null;
-//        if (args != null)
-//            target = Fragment.instantiate(mContext, targetFragmentClass.getName(), args);
-//        else
-//            target = Fragment.instantiate(mContext, targetFragmentClass.getName());
-//        switchFragment(current, target);
-//    }
-//
-//    /**
-//     * 切换Fragment
-//     *
-//     * @param current 当前fragment
-//     * @param target  目标fragment
-//     */
-//    private void switchFragment(Fragment current, Fragment target) {
-//        FragmentTransaction transaction = mFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-//        String targetName = target.getClass().getName();
-//        if (current != null)
-//            transaction.replace(R.id.fragment_container, target, targetName).addToBackStack(targetName);
-//        else
-//            transaction.add(R.id.fragment_container, target, targetName);
-//        transaction.commit();
-//    }
-
     /**
      * 获得根Activity
      *
@@ -329,7 +295,7 @@ public abstract class DispatchFragment<VB extends ViewModelBridge> extends Fragm
     /**
      * 分发model到ViewBinder(onStart时调用)
      */
-    protected abstract void dispatchModelOnStart();
+    public abstract void dispatchModelOnStart();
 
     /**
      * 收集请求url

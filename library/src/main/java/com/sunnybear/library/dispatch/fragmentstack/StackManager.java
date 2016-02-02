@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 
 import com.sunnybear.library.R;
 import com.sunnybear.library.dispatch.DispatchFragment;
+import com.sunnybear.library.util.StringUtils;
 
 /**
  * Fragment任务栈管理
@@ -61,9 +62,11 @@ public class StackManager implements HandlerFragment {
      * @param fragment fragment实例
      */
     public void setFragment(@NonNull DispatchFragment fragment) {
+        String fragmentName = fragment.getClass().getName();
         FragmentTransaction transaction = context.getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container, fragment, fragment.getClass().getName()).commit();
+                .replace(R.id.fragment_container, fragment, fragmentName)
+                .addToBackStack(fragmentName).commit();
         stack.putStandard(fragment);
     }
 
@@ -74,15 +77,18 @@ public class StackManager implements HandlerFragment {
      * @param to   目标Fragment
      */
     public void switchFragment(@NonNull Fragment from, @NonNull Fragment to) {
+        String fragmentName = to.getClass().getName();
         if (System.currentTimeMillis() - currentTime > CLICK_SPACE) {
             currentTime = System.currentTimeMillis();
             FragmentTransaction transaction = context.getSupportFragmentManager().beginTransaction();
             if (nextIn != 0 && nextOut != 0 && quitIn != 0 && quitOut != 0)
                 transaction.setCustomAnimations(nextIn, nextOut)
                         .add(R.id.fragment_container, to, to.getClass().getName())
+                        .addToBackStack(fragmentName)
                         .hide(from).commit();
             else
                 transaction.add(R.id.fragment_container, to, to.getClass().getName())
+                        .addToBackStack(fragmentName)
                         .hide(from).commit();
         }
     }
@@ -122,6 +128,8 @@ public class StackManager implements HandlerFragment {
             case SINGLE_TOP:
                 if (!stack.putSingleTop(to, args))
                     switchFragment(from, to);
+                else
+                    closeOtherFragment(to);
                 break;
             case SINGLE_TASK:
                 if (!stack.putSingleTask(to))
@@ -204,6 +212,9 @@ public class StackManager implements HandlerFragment {
         }
     }
 
+    /**
+     * 关闭当前的Fragment
+     */
     public void close() {
         context.getSupportFragmentManager().popBackStack();
     }
@@ -219,14 +230,29 @@ public class StackManager implements HandlerFragment {
         }
     }
 
+    /**
+     * 关闭其他的Fragment
+     *
+     * @param fragment 不要关闭的Fragment
+     */
+    public void closeOtherFragment(Fragment fragment) {
+        int backStackCount = context.getSupportFragmentManager().getBackStackEntryCount();
+        for (int i = 0; i < backStackCount; i++) {
+            String backStackName = context.getSupportFragmentManager().getBackStackEntryAt(i).getName();
+            if (!StringUtils.equals(backStackName, fragment.getClass().getName()))
+                context.getSupportFragmentManager().popBackStack(backStackName, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
     public void onBackPressed() {
         Fragment[] last = stack.getLast();
-        final Fragment from = last[0];
-        Fragment to = last[1];
+        final DispatchFragment from = (DispatchFragment) last[0];
+        final DispatchFragment to = (DispatchFragment) last[1];
 
         if (from != null && to != null) {
             FragmentTransaction transaction = context.getSupportFragmentManager().beginTransaction();
             transaction.show(to).commit();
+            to.dispatchModelOnStart();//返回时重新回调dispatchModelOnStart方法
         }
         View fromView = from.getView();
         if (fromView != null && next_out != null) {
