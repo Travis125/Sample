@@ -44,13 +44,10 @@ public class SquareGridView extends ViewGroup {
 
     private void initStyleable(Context context, AttributeSet attrs) {
         if (attrs != null) {
-            TypedArray array = context.obtainStyledAttributes
-                    (attrs, R.styleable.SquareGridView);
+            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SquareGridView);
             maxSize = array.getInteger(R.styleable.SquareGridView_maxSize, DEFAULT_MAX_SIZE);
-            horizontalSpacing = array.
-                    getDimensionPixelSize(R.styleable.SquareGridView_horizontal_spacing, DEFAULT_HORIZONTAL_SPACE);
-            verticalSpacing = array.
-                    getDimensionPixelSize(R.styleable.SquareGridView_vertical_spacing, DEFAULT_VERTICAL_SPACE);
+            horizontalSpacing = array.getDimensionPixelSize(R.styleable.SquareGridView_horizontal_spacing, DEFAULT_HORIZONTAL_SPACE);
+            verticalSpacing = array.getDimensionPixelSize(R.styleable.SquareGridView_vertical_spacing, DEFAULT_VERTICAL_SPACE);
             ratio = array.getFloat(R.styleable.SquareGridView_ratio, DEFAULT_RATIO);
             array.recycle();
         }
