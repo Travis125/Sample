@@ -145,9 +145,8 @@ public class SquareGridView extends ViewGroup {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (adapter != null) {
+                    if (adapter != null)
                         adapter.onItemClick(view, index, adapter.getItem(index));
-                    }
                 }
             });
         }
