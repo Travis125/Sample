@@ -70,7 +70,7 @@ public class ImagePipelineConfigFactory {
             }
         };
         //小图片的磁盘配置
-        DiskCacheConfig diskSmallCacheConfig = DiskCacheConfig.newBuilder()
+        DiskCacheConfig diskSmallCacheConfig = DiskCacheConfig.newBuilder(context)
                 .setBaseDirectoryPath(new File(BasicApplication.sdCardPath).getAbsoluteFile())//缓存图片基路径
                 .setBaseDirectoryName(ConfigConstants.IMAGE_PIPELINE_SMALL_CACHE_DIR)//文件夹名
 //            .setCacheErrorLogger(cacheErrorLogger)//日志记录器用于日志错误的缓存。
@@ -82,7 +82,7 @@ public class ImagePipelineConfigFactory {
 //            .setVersion(version)
                 .build();
         //默认图片的磁盘配置
-        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder()
+        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context)
                 .setBaseDirectoryPath(new File(BasicApplication.sdCardPath).getAbsoluteFile())//缓存图片基路径
                 .setBaseDirectoryName(ConfigConstants.IMAGE_PIPELINE_CACHE_DIR)//文件夹名
 //            .setCacheErrorLogger(cacheErrorLogger)//日志记录器用于日志错误的缓存。
