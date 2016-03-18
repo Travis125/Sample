@@ -35,7 +35,7 @@ dependencies {
     //注解声明依赖库
     compile 'com.jakewharton:butterknife:7.0.1'
     //OKHttp
-    compile 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
     compile 'com.squareup.okio:okio:1.6.0'
     //Json解析库
     compile 'com.alibaba:fastjson:1.2.7'
