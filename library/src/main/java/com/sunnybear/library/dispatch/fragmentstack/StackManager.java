@@ -254,29 +254,31 @@ public class StackManager implements HandlerFragment {
             transaction.show(to).commit();
             to.dispatchModelOnStart();//返回时重新回调dispatchModelOnStart方法
         }
-        View fromView = from.getView();
-        if (fromView != null && next_out != null) {
-            fromView.startAnimation(next_out);
-            next_out.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
+        if (from!=null){
+            View fromView = from.getView();
+            if (fromView != null && next_out != null) {
+                fromView.startAnimation(next_out);
+                next_out.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
 
-                }
+                    }
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    stack.onBackPressed();
-                    closeFragment(from);
-                }
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        stack.onBackPressed();
+                        closeFragment(from);
+                    }
 
-                @Override
-                public void onAnimationRepeat(Animation animation) {
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
 
-                }
-            });
-        } else {
-            stack.onBackPressed();
-            closeFragment(from);
+                    }
+                });
+            } else {
+                stack.onBackPressed();
+                closeFragment(from);
+            }
         }
         if (to != null) {
             View toView = to.getView();
