@@ -25,6 +25,7 @@ import com.sunnybear.library.dispatch.fragmentstack.StackManager;
 import com.sunnybear.library.model.network.OkHttpRequestHelper;
 import com.sunnybear.library.model.network.callback.RequestCallback;
 import com.sunnybear.library.util.KeyboardUtils;
+import com.sunnybear.library.util.KeyboardWatcher;
 import com.sunnybear.library.util.Logger;
 import com.sunnybear.library.util.StringUtils;
 import com.sunnybear.library.util.ToastUtils;
@@ -40,7 +41,8 @@ import butterknife.ButterKnife;
  * 基础FragmentActivity,主管模组分发
  * Created by sunnybear on 16/1/29.
  */
-public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCompatActivity implements Dispatch {
+public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCompatActivity
+        implements Dispatch, KeyboardWatcher.OnKeyboardToggleListener {
     protected static final String EVENT_HOME_CLICK = "home_click";//点击Home键的EventBus标签
 
     protected Context mContext;
@@ -51,8 +53,10 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
     //Home键广播接受器
     private HomeBroadcastReceiver mBroadcastReceiver = new HomeBroadcastReceiver();
 
-    StackManager manager;
+    private StackManager manager;
     private OnKeyDownCallback callback;
+
+    private KeyboardWatcher watcher;//软键盘显示隐藏监听
 
     public void setOnKeyDownCallback(OnKeyDownCallback callback) {
         this.callback = callback;
@@ -86,6 +90,8 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
         registerReceiver(mBroadcastReceiver, Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         //分发model到Presenter
         manager = new StackManager(this);
+        //注册软键盘监听
+        watcher = KeyboardWatcher.initWith(this).bindKeyboardWatcher(this);
         dispatchModel(savedInstanceState);
     }
 
@@ -110,6 +116,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
     protected void onDestroy() {
         super.onDestroy();
         EventBusHelper.unregister(this);//反注册EvenBus
+        watcher.unbindKeyboardWatcher();//反注册软键盘监听
         unregisterReceiver(mBroadcastReceiver);
     }
 
@@ -356,6 +363,24 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
                     Logger.i("长按Home键, 显示最近使用的程序列表");
             }
         }
+    }
+
+    /**
+     * 软键盘显示回调
+     *
+     * @param keyboardSize 键盘尺寸
+     */
+    @Override
+    public void onKeyboardShown(int keyboardSize) {
+
+    }
+
+    /**
+     * 软键盘隐藏回调
+     */
+    @Override
+    public void onKeyboardClosed() {
+
     }
 
     /**
