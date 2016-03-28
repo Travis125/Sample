@@ -25,7 +25,10 @@ public class RecyclerViewActivity extends DispatchActivity<RecyclerViewViewBinde
     protected void dispatchModel(@Nullable Bundle savedInstanceState) {
         List<String> strings = new ArrayList<>();
         for (int i = 1; i <= 50; i++) {
-            strings.add("第" + i + "项");
+            if (i % 2 == 0)
+                strings.add("第" + i + "项");
+            else
+                strings.add("http://i1.mopimg.cn/img/tt/2016-01/916/2016012510130832.jpg790x600.jpg");
         }
         mViewBinder.setRecyclerView(strings);
     }

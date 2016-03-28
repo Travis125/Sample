@@ -18,7 +18,7 @@ public class StringAdapter extends BasicAdapter<String, StringViewHolder> {
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.activity_recycler_view_item;
+        return R.layout.activity_recycler_view_text_item;
     }
 
     @Override

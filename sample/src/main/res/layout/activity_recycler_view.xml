@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sunnybear.library.view.recycler.BasicRecyclerView
+<com.sunnybear.library.view.recycler.BasicRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rv_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    app:divider_color="@color/divider_color"
+    app:divider_height="1dp"
+    app:has_row_divider="true"
+    app:layout_mode="vertical" />
