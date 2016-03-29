@@ -39,7 +39,7 @@ public class SuperTask {
      * 用于接收处理来自后台线程的消息,可用于更新UI.
      */
     public interface MessageListener {
-        void handleMessage(@NonNull Message message);
+        void handleMessage(@NonNull Message msg);
     }
 
     /**

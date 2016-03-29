@@ -53,7 +53,7 @@ public abstract class DispatchActivity<VB extends ViewModelBridge> extends AppCo
     //Home键广播接受器
     private HomeBroadcastReceiver mBroadcastReceiver = new HomeBroadcastReceiver();
 
-    private StackManager manager;
+    StackManager manager;
     private OnKeyDownCallback callback;
 
     private KeyboardWatcher watcher;//软键盘显示隐藏监听

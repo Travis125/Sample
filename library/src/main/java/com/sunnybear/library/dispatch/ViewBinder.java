@@ -10,11 +10,11 @@ import android.os.Bundle;
  * Created by sunnybear on 16/1/29.
  */
 public abstract class ViewBinder<D extends Dispatch> implements ViewModelBridge {
-    protected D mContext;
+    protected D mDispatch;
 
     public ViewBinder(Context context) {
-        mContext = (D) context;
-        if (!(mContext instanceof DispatchActivity))
+        mDispatch = (D) context;
+        if (!(mDispatch instanceof DispatchActivity))
             throw new RuntimeException("ViewBinder中的Content必须是DispatchActivity类型");
     }
 
@@ -35,7 +35,7 @@ public abstract class ViewBinder<D extends Dispatch> implements ViewModelBridge 
      * @param args        传递参数
      */
     protected void startActivity(Class<? extends Activity> targetClass, Bundle args) {
-        ((DispatchActivity) mContext).startActivity(targetClass, args);
+        ((DispatchActivity) mDispatch).startActivity(targetClass, args);
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class ViewBinder<D extends Dispatch> implements ViewModelBridge 
      * @param args        传递参数
      */
     protected void startService(Class<? extends Service> targetClass, Bundle args) {
-        ((DispatchActivity) mContext).startService(targetClass, args);
+        ((DispatchActivity) mDispatch).startService(targetClass, args);
     }
 
     /**

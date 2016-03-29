@@ -67,7 +67,7 @@ public class IndexViewBinder extends ViewBinder<IndexActivity> implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_execute:
-                mContext.getCity();
+                mDispatch.getCity();
                 break;
             case R.id.btn_player:
                 startActivity(VideoPlayerActivity.class,
