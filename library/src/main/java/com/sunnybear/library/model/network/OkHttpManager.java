@@ -20,9 +20,9 @@ import javax.net.ssl.TrustManager;
  * Created by guchenkai on 2015/10/26.
  */
 public final class OkHttpManager {
-    private static final int CONNECT_TIMEOUT_MILLIS = 10 * 1000;//连接时间超时
-    private static final int WRITE_TIMEOUT_MILLIS = 5 * 1000;//写入时间超时
-    private static final int READ_TIMEOUT_MILLIS = 5 * 1000;//读取时间超时
+    private static final int CONNECT_TIMEOUT_MILLIS = 15 * 1000;//连接时间超时
+    private static final int WRITE_TIMEOUT_MILLIS = 20 * 1000;//写入时间超时
+    private static final int READ_TIMEOUT_MILLIS = 20 * 1000;//读取时间超时
 
     private volatile static OkHttpManager instance;
     private static List<Interceptor> mInterceptors;
