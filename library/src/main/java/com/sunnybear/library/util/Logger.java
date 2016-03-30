@@ -75,12 +75,10 @@ public final class Logger {
      * @param tag is the given string which will be used in Logger
      */
     public static Settings init(String tag) {
-        if (tag == null) {
+        if (tag == null)
             throw new NullPointerException("tag may not be null");
-        }
-        if (tag.trim().length() == 0) {
+        if (tag.trim().length() == 0)
             throw new IllegalStateException("tag may not be empty");
-        }
         Logger.TAG = tag;
         return settings;
     }
@@ -134,15 +132,12 @@ public final class Logger {
 
     public static void e(String tag, String message, Exception e, int methodCount) {
         validateMethodCount(methodCount);
-        if (e != null && message != null) {
+        if (e != null && message != null)
             message += " : " + e.toString();
-        }
-        if (e != null && message == null) {
+        if (e != null && message == null)
             message = e.toString();
-        }
-        if (message == null) {
+        if (message == null)
             message = "No message/exception is set";
-        }
         log(Log.ERROR, tag, message, methodCount);
     }
 
@@ -261,9 +256,8 @@ public final class Logger {
     }
 
     private static void log(int logType, String tag, String message, int methodCount) {
-        if (settings.logLevel == LogLevel.NONE) {
+        if (settings.logLevel == LogLevel.NONE)
             return;
-        }
         logTopBorder(logType, tag);
         logHeaderContent(logType, tag, methodCount);
 
@@ -271,16 +265,14 @@ public final class Logger {
         byte[] bytes = message.getBytes();
         int length = bytes.length;
         if (length <= CHUNK_SIZE) {
-            if (methodCount > 0) {
+            if (methodCount > 0)
                 logDivider(logType, tag);
-            }
             logContent(logType, tag, message);
             logBottomBorder(logType, tag);
             return;
         }
-        if (methodCount > 0) {
+        if (methodCount > 0)
             logDivider(logType, tag);
-        }
         for (int i = 0; i < length; i += CHUNK_SIZE) {
             int count = Math.min(length - i, CHUNK_SIZE);
             //create a new String with system's default charset (which is UTF-8 for Android)
@@ -366,15 +358,13 @@ public final class Logger {
     }
 
     private static void validateMethodCount(int methodCount) {
-        if (methodCount < 0 || methodCount > MAX_METHOD_COUNT) {
+        if (methodCount < 0 || methodCount > MAX_METHOD_COUNT)
             throw new IllegalStateException("methodCount must be > 0 and < 5");
-        }
     }
 
     private static String formatTag(String tag) {
-        if (!TextUtils.isEmpty(tag) && !TextUtils.equals(TAG, tag)) {
+        if (!TextUtils.isEmpty(tag) && !TextUtils.equals(TAG, tag))
             return TAG + "-" + tag;
-        }
         return TAG;
     }
 

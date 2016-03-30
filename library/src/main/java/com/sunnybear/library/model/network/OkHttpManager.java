@@ -24,7 +24,7 @@ public final class OkHttpManager {
     private static final int WRITE_TIMEOUT_MILLIS = 5 * 1000;//写入时间超时
     private static final int READ_TIMEOUT_MILLIS = 5 * 1000;//读取时间超时
 
-    private static OkHttpManager instance;
+    private volatile static OkHttpManager instance;
     private static List<Interceptor> mInterceptors;
 
     private int mCacheSize;
@@ -43,7 +43,10 @@ public final class OkHttpManager {
      */
     public static OkHttpManager getInstance(String cacheDirectoryPath, int cacheSize) {
         if (instance == null)
-            instance = new OkHttpManager(cacheDirectoryPath, cacheSize);
+            synchronized (OkHttpManager.class) {
+                if (instance == null)
+                    instance = new OkHttpManager(cacheDirectoryPath, cacheSize);
+            }
         return instance;
     }
 
