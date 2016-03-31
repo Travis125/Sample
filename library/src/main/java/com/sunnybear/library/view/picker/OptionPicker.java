@@ -20,7 +20,7 @@ import java.util.List;
  * Created By guchenkai
  */
 public class OptionPicker extends WheelPicker {
-    protected ArrayList<String> options = new ArrayList<String>();
+    protected ArrayList<String> options = new ArrayList<>();
     private OnOptionPickListener onOptionPickListener;
     private String selectedOption = "";
     private String label = "";
@@ -45,9 +45,8 @@ public class OptionPicker extends WheelPicker {
 
     @Override
     protected View initContentView() {
-        if (options.size() == 0) {
+        if (options.size() == 0)
             throw new IllegalArgumentException("please initial options at first, can't be empty");
-        }
         LinearLayout layout = new LinearLayout(activity);
         layout.setOrientation(LinearLayout.HORIZONTAL);
         layout.setGravity(Gravity.CENTER);
@@ -64,9 +63,8 @@ public class OptionPicker extends WheelPicker {
         labelView.setTextColor(textColorFocus);
         labelView.setTextSize(textSize);
         layout.addView(labelView);
-        if (!TextUtils.isEmpty(label)) {
+        if (!TextUtils.isEmpty(label))
             labelView.setText(label);
-        }
         optionView.setItems(options);
         optionView.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
@@ -83,9 +81,8 @@ public class OptionPicker extends WheelPicker {
         super.setOnConfirmListener(new OnConfirmListener() {
             @Override
             public void onConfirm() {
-                if (onOptionPickListener != null) {
+                if (onOptionPickListener != null)
                     onOptionPickListener.onOptionPicked(selectedOption);
-                }
             }
         });
     }
@@ -93,7 +90,5 @@ public class OptionPicker extends WheelPicker {
     public interface OnOptionPickListener {
 
         void onOptionPicked(String option);
-
     }
-
 }
