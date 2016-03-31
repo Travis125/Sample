@@ -11,6 +11,7 @@ import com.sunnybear.library.view.picker.widget.WheelView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 单项选择器
@@ -27,6 +28,11 @@ public class OptionPicker extends WheelPicker {
     public OptionPicker(Activity activity, String[] options) {
         super(activity);
         this.options.addAll(Arrays.asList(options));
+    }
+
+    public OptionPicker(Activity activity, List<String> options){
+        super(activity);
+        this.options.addAll(options);
     }
 
     public void setLabel(String label) {

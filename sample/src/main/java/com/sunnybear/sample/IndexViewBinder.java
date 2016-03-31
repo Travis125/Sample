@@ -10,7 +10,9 @@ import com.alexvasilkov.gestures.views.GestureFrameLayout;
 import com.sunnybear.library.dispatch.ViewBinder;
 import com.sunnybear.library.model.BundleHelper;
 import com.sunnybear.library.util.SDCardUtils;
+import com.sunnybear.library.util.ToastUtils;
 import com.sunnybear.library.view.image.ImageLoaderView;
+import com.sunnybear.library.view.picker.OptionPicker;
 import com.sunnybear.player.VideoPlayerActivity;
 
 import java.io.File;
@@ -28,6 +30,8 @@ public class IndexViewBinder extends ViewBinder<IndexActivity> implements View.O
     ImageLoaderView iv_image;
     @Bind(R.id.fl_gesture)
     GestureFrameLayout fl_gesture;
+
+    private OptionPicker picker;
 
     public IndexViewBinder(Context context) {
         super(context);
@@ -52,6 +56,14 @@ public class IndexViewBinder extends ViewBinder<IndexActivity> implements View.O
                 .setFillViewport(false)//如果设置为true小图像缩放以适合整个窗口(或整个运动区域如果是集),即使这需要缩放级别高于最大缩放级别。
                 .setFitMethod(Settings.Fit.INSIDE)//设置显示窗口区域内图像拟合方法
                 .setGravity(Gravity.CENTER);//图像引力窗口区域内
+
+        picker = new OptionPicker(mDispatch, mDispatch.getOptions());
+        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+            @Override
+            public void onOptionPicked(String option) {
+                ToastUtils.showToastLong(mDispatch, option);
+            }
+        });
     }
 
     public void setImageUrl(String url) {
@@ -62,7 +74,7 @@ public class IndexViewBinder extends ViewBinder<IndexActivity> implements View.O
         tv_text.setText(text);
     }
 
-    @OnClick({R.id.btn_execute, R.id.btn_player, R.id.btn_start})
+    @OnClick({R.id.btn_execute, R.id.btn_player, R.id.btn_start, R.id.btn_picker})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -77,6 +89,9 @@ public class IndexViewBinder extends ViewBinder<IndexActivity> implements View.O
             case R.id.btn_start:
                 startActivity(RecyclerViewActivity.class,
                         BundleHelper.builder().putString("string", "产品傻逼").build());
+                break;
+            case R.id.btn_picker:
+                picker.show();
                 break;
         }
     }

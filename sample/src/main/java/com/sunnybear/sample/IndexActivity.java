@@ -48,7 +48,7 @@ public class IndexActivity extends DispatchActivity<IndexViewBinder> {
                 .handle(new SuperTask.MessageListener() {
                     @Override
                     public void handleMessage(@NonNull Message msg) {
-                        switch (msg.what){
+                        switch (msg.what) {
                             case 1:
                                 Logger.d((String) msg.obj);
                                 break;
@@ -99,5 +99,9 @@ public class IndexActivity extends DispatchActivity<IndexViewBinder> {
     @Subcriber(tag = EVENT_HOME_CLICK)
     public void eventHome(String msg) {
         Logger.d(msg);
+    }
+
+    public String[] getOptions() {
+        return new String[]{"Java", "Android", "iOS", "C#", "C/C++", "Ruby", "PHP"};
     }
 }

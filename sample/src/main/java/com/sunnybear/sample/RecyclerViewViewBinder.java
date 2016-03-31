@@ -40,7 +40,7 @@ public class RecyclerViewViewBinder extends ViewBinder<RecyclerViewActivity> {
 
     @Override
     public void onViewCreatedFinish() {
-        adapter = new BasicAdapter<String, BasicViewHolder>(mContext, null) {
+        adapter = new BasicAdapter<String, BasicViewHolder>(mDispatch, null) {
             private final int TYPE_TEXT = 1;
             private final int TYPE_IMAGE = 2;
 
@@ -83,9 +83,9 @@ public class RecyclerViewViewBinder extends ViewBinder<RecyclerViewActivity> {
             public void onItemClick(String s, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putString("position", s);
-                Intent intent = new Intent(mContext, NextActivity.class);
+                Intent intent = new Intent(mDispatch, NextActivity.class);
                 intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                mDispatch.startActivity(intent);
 //                EventBusHelper.post(s, "tag");
             }
         });
