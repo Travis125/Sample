@@ -85,36 +85,36 @@ public class ImagePipelineConfigFactory {
         DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context)
                 .setBaseDirectoryPath(new File(BasicApplication.sdCardPath).getAbsoluteFile())//缓存图片基路径
                 .setBaseDirectoryName(ConfigConstants.IMAGE_PIPELINE_CACHE_DIR)//文件夹名
-//            .setCacheErrorLogger(cacheErrorLogger)//日志记录器用于日志错误的缓存。
-//            .setCacheEventListener(cacheEventListener)//缓存事件侦听器。
-//            .setDiskTrimmableRegistry(diskTrimmableRegistry)//类将包含一个注册表的缓存减少磁盘空间的环境。
+//                .setCacheErrorLogger(cacheErrorLogger)//日志记录器用于日志错误的缓存。
+//                .setCacheEventListener(cacheEventListener)//缓存事件侦听器。
+//                .setDiskTrimmableRegistry(diskTrimmableRegistry)//类将包含一个注册表的缓存减少磁盘空间的环境。
                 .setMaxCacheSize(ConfigConstants.MAX_DISK_CACHE_SIZE)//默认缓存的最大大小。
                 .setMaxCacheSizeOnLowDiskSpace(ConfigConstants.MAX_DISK_CACHE_LOW_SIZE)//缓存的最大大小,使用设备时低磁盘空间。
                 .setMaxCacheSizeOnVeryLowDiskSpace(ConfigConstants.MAX_DISK_CACHE_VERY_LOW_SIZE)//缓存的最大大小,当设备极低磁盘空间
-//            .setVersion(version)
+//                .setVersion(version)
                 .build();
         //缓存图片配置
         ImagePipelineConfig.Builder configBuilder = null;
         if (okHttpClient != null)
             configBuilder = OkHttpImagePipelineConfigFactory.newBuilder(context, okHttpClient);
         else
-            configBuilder = ImagePipelineConfig.newBuilder(context);
-//            .setAnimatedImageFactory(AnimatedImageFactory animatedImageFactory)//图片加载动画
-        configBuilder.setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)//内存缓存配置(一级缓存，已解码的图片)
-//            .setCacheKeyFactory(cacheKeyFactory)//缓存Key工厂
-//            .setEncodedMemoryCacheParamsSupplier(encodedCacheParamsSupplier)//内存缓存和未解码的内存缓存的配置(二级缓存)
-//            .setExecutorSupplier(executorSupplier)//线程池配置
-//            .setImageCacheStatsTracker(imageCacheStatsTracker)//统计缓存的命中率
-//            .setImageDecoder(ImageDecoder imageDecoder) //图片解码器配置
-//            .setIsPrefetchEnabledSupplier(Supplier<Boolean> isPrefetchEnabledSupplier)//图片预览(缩略图，预加载图等)预加载到文件缓存
-                .setMainDiskCacheConfig(diskCacheConfig)//磁盘缓存配置(总，三级缓存)
-//            .setMemoryTrimmableRegistry(memoryTrimmableRegistry) //内存用量的缩减,有时我们可能会想缩小内存用量。比如应用中有其他数据需要占用内存，不得不把图片缓存清除或者减小 或者我们想检查看看手机是否已经内存不够了。
-//            .setNetworkFetchProducer(networkFetchProducer)//自定的网络层配置：如OkHttp，Volley
-//            .setPoolFactory(poolFactory)//线程池工厂配置
-                .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())//渐进式JPEG图
-//            .setRequestListeners(requestListeners)//图片请求监听
-                .setResizeAndRotateEnabledForNetwork(true)//调整和旋转是否支持网络图片
-                .setSmallImageDiskCacheConfig(diskSmallCacheConfig);//磁盘缓存配置(小图片，可选～三级缓存的小图优化缓存)
+            configBuilder = ImagePipelineConfig.newBuilder(context)
+//                  .setAnimatedImageFactory(AnimatedImageFactory animatedImageFactory)//图片加载动画
+                    .setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)//内存缓存配置(一级缓存，已解码的图片)
+//                  .setCacheKeyFactory(cacheKeyFactory)//缓存Key工厂
+//                  .setEncodedMemoryCacheParamsSupplier(encodedCacheParamsSupplier)//内存缓存和未解码的内存缓存的配置(二级缓存)
+//                  .setExecutorSupplier(executorSupplier)//线程池配置
+//                  .setImageCacheStatsTracker(imageCacheStatsTracker)//统计缓存的命中率
+//                  .setImageDecoder(ImageDecoder imageDecoder) //图片解码器配置
+//                  .setIsPrefetchEnabledSupplier(Supplier<Boolean> isPrefetchEnabledSupplier)//图片预览(缩略图，预加载图等)预加载到文件缓存
+                    .setMainDiskCacheConfig(diskCacheConfig)//磁盘缓存配置(总，三级缓存)
+//                  .setMemoryTrimmableRegistry(memoryTrimmableRegistry) //内存用量的缩减,有时我们可能会想缩小内存用量。比如应用中有其他数据需要占用内存，不得不把图片缓存清除或者减小 或者我们想检查看看手机是否已经内存不够了。
+//                  .setNetworkFetchProducer(networkFetchProducer)//自定的网络层配置：如OkHttp，Volley
+//                  .setPoolFactory(poolFactory)//线程池工厂配置
+                    .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())//渐进式JPEG图
+//                  .setRequestListeners(requestListeners)//图片请求监听
+                    .setResizeAndRotateEnabledForNetwork(true)//调整和旋转是否支持网络图片
+                    .setSmallImageDiskCacheConfig(diskSmallCacheConfig);//磁盘缓存配置(小图片，可选～三级缓存的小图优化缓存)
         return configBuilder.build();
     }
 
