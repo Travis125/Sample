@@ -8,6 +8,8 @@ library是快速开发框架
 试例见sample
 
 blur是C层图片模糊库(动态库已集成如library中)
+生成头文件时一定要移动到src/main/java下
+生成h头文件的命令为javah -jni -d ../jni xxx.xxx.xxx.xxx
 
 videoplayer是视频播放库
 使用方法:
